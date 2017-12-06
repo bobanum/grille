@@ -1,8 +1,15 @@
+@largeur: 8.5in;
+@hauteur: 11in;
 @page {
-	size:8.5in 11in;
+	size:@largeur @hauteur;
 	margin:0;
 }
 @media all {
+	div.page {
+		width: @largeur;
+		height: @hauteur;
+		box-shadow: 0 0 1em inset;
+	}
 	body {
 		font-family:arial narrow;
 		& > h1 {
@@ -25,10 +32,10 @@
 	}
 	section.grille {
 		flex:1 1 auto;
-		margin:1em;
+		margin:.25in;
 		counter-reset:no-section;
-		padding:1em;
-		border:1px solid black;
+//		padding:1em;
+//		border:1px solid black;
 //		height:100%;
 		display: flex;
 		flex-direction: column;

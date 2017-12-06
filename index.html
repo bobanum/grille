@@ -3,23 +3,16 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<link rel="stylesheet" href="grille.css" />
-	<script type="text/javascript">
-		window.addEventListener("load", function() {
-			//			if (!document.body.classList.contains("grille")) {
-			console.log(interface);
-			interface.appendChild(interface.firstElementChild.cloneNode(true));
-			interface.appendChild(interface.firstElementChild.cloneNode(true));
-			//			}
-		});
-
-	</script>
+	<link rel="stylesheet" href="nouveau.css" />
+	<script src="Grille.js"></script>
+	<script>Grille.load("projet2_zelda.json", 3)</script>
 	<title>Grille de correction</title>
 </head>
 
 <body>
 	<h1>Grille de correction</h1>
-	<div id="interface">
+	<div id="interface" class="page">
+<!--
 		<section class="grille">
 			<header>
 				<h1>Projet Zelda</h1>
@@ -77,6 +70,7 @@
 				<div></div>
 			</div>
 		</section>
+-->
 	</div>
 </body>
 

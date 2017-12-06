@@ -4,6 +4,11 @@
   margin: 0;
 }
 @media all {
+  div.page {
+    width: 8.5in;
+    height: 11in;
+    box-shadow: 0 0 1em inset;
+  }
   body {
     font-family: arial narrow;
   }
@@ -25,10 +30,8 @@
   }
   section.grille {
     flex: 1 1 auto;
-    margin: 1em;
+    margin: .25in;
     counter-reset: no-section;
-    padding: 1em;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
