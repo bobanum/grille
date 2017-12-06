@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="grille.css" />
+	<script type="text/javascript">
+		window.addEventListener("load", function() {
+			//			if (!document.body.classList.contains("grille")) {
+			console.log(interface);
+			interface.appendChild(interface.firstElementChild.cloneNode(true));
+			interface.appendChild(interface.firstElementChild.cloneNode(true));
+			//			}
+		});
+
+	</script>
+	<title>Grille de correction</title>
+</head>
+
+<body>
+	<h1>Grille de correction</h1>
+	<div id="interface">
+		<section class="grille">
+			<header>
+				<h1>Projet Zelda</h1>
+				<div class="pointage">/35</div>
+			</header>
+			<div class="identification"></div>
+			<h2>Général</h2>
+			<ol>
+				<li data-pts="4"><span>Qualité visuelle et effort</span></li>
+				<li data-pts="3"><span>Mise en forme des sections (en-tête, pied, colonnes, etc.)</span></li>
+				<li data-pts="3"><span>Mise en forme du texte (paragraphes, sous-titres, etc.)</span></li>
+			</ol>
+			<h2>Éléments obligatoires</h2>
+			<ol>
+				<li data-pts="1"><span>Feuille <code>reset.css</code></span></li>
+				<li data-pts="1"><span>Arrière-plan qui se répète ou dégradé</span></li>
+				<li data-pts="1"><span>Arrière-plan qui non répété</span></li>
+				<li data-pts="1"><span>Ombre sur le titre</span></li>
+				<li data-pts="1"><span>Largeur fixe et centré</span></li>
+				<li data-pts="1"><span>Colonnes ou menu horizontal</span></li>
+				<li data-pts="2"><span>4 éléments cachés (1&nbsp;règle)</span></li>
+				<li data-pts="1"><span>Mise en forme des liens</span></li>
+				<li data-pts="2"><span>2 polices personnalisées</span></li>
+			</ol>
+			<h2>Le menu</h2>
+			<ol>
+				<li data-pts="2"><span>Mise en forme personnalisée</span></li>
+				<li data-pts="2"><span>Affichage des sous-menus</span></li>
+				<li data-pts="1"><span>Survol de la souris</span></li>
+			</ol>
+			<h2>Les figure et figcaption</h2>
+			<ol>
+				<li data-pts="1"><span>Mise en forme</span></li>
+				<li data-pts="1"><span>Bordure</span></li>
+				<li data-pts="1"><span>Ombre</span></li>
+				<li data-pts="1"><span>Float</span></li>
+			</ol>
+			<h2>Qualité du code</h2>
+			<ol>
+				<li data-pts="2"><span>Règles en ordre de priorité</span></li>
+				<li data-pts="1"><span>Règles bien indentées</span></li>
+			</ol>
+			<h2>Pénalités</h2>
+			<ol>
+				<li><span>Fichier CSS non identifié</span></li>
+				<li><span>CSS en dehors de <code>zelda.css</code></span></li>
+				<li><span>Images en dehors du dossier images</span></li>
+				<li><span>Mauvais nom de remise</span></li>
+			</ol>
+			<h2>Commentaires</h2>
+			<div class="commentaires">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</section>
+	</div>
+</body>
+
+</html>
