@@ -34,7 +34,9 @@ class Grille {
 		if (this._criteres.length) {
 			resultat.appendChild(this.dom_criteres());
 		}
-
+		if (this.lignes) {
+			resultat.appendChild(this.dom_lignes(this.lignes));
+		}
 		resultat.obj = this;
 		return resultat;
 	}
@@ -42,6 +44,21 @@ class Grille {
 		var resultat = document.createElement("div");
 		resultat.classList.add("titre");
 		resultat.innerHTML = this.titre;
+		return resultat;
+	}
+	dom_lignes(lignes) {
+		var resultat = document.createElement("div");
+		resultat.classList.add("lignes");
+		if (typeof lignes === "number") {
+			for (let i = 0; i < lignes; i += 1) {
+				resultat.appendChild(document.createElement("div"));
+			}
+		} else if (lignes instanceof Array) {
+			lignes.forEach(function (l) {
+				var div = resultat.appendChild(document.createElement("div"));
+				div.innerHTML = l;
+			});
+		}
 		return resultat;
 	}
 	dom_criteres() {
@@ -74,11 +91,17 @@ class Grille {
 		return this;
 	}
 	static loadJson(fic) {
-		var xhr = new XMLHttpRequest();
-		xhr.open("get", fic, false);
-		xhr.send(null);
-		var resultat = this.fromJson(xhr.responseText);
-		return resultat;
+		return new Promise(resolve => {
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", fic);
+			xhr.responseType = "json";
+			xhr.addEventListener("load", (e) => {
+				console.log(e.target);
+				resolve(this.fromObject(e.target.response));
+
+			});
+			xhr.send(null);
+		});
 	}
 	static fromJson(json) {
 		return this.fromObject(JSON.parse(json));
@@ -89,14 +112,15 @@ class Grille {
 		return resultat;
 	}
 	static load(fichierJson, nb) {
-		var g = Grille.loadJson("projet2_zelda.json");
-		nb = nb || 1;
-		window.addEventListener("load", function () {
-			var dom = g.dom;
-			window.interface.appendChild(dom);
-			for (let i = 1; i < nb; i += 1) {
-				window.interface.appendChild(dom.cloneNode(true));
-			}
+		return Grille.loadJson("projet2_zelda.json").then(data => {
+			nb = nb || 1;
+			window.addEventListener("load", () => {
+				var dom = data.dom;
+				window.interface.appendChild(dom);
+				for (let i = 1; i < nb; i += 1) {
+					window.interface.appendChild(dom.cloneNode(true));
+				}
+			});
 		});
 	}
 	static init() {
