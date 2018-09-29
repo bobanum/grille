@@ -10,7 +10,6 @@
     box-shadow: 0 0 1em inset;
   }
   body {
-    background-color: red;
     font-family: arial narrow;
   }
   body > h1 {

@@ -1,3 +1,4 @@
+@import url(images/sf_proverbial_gothi/style.css);
 :root {
 	--largeur: 8.5in;
 	--hauteur: 11in;
@@ -131,7 +132,30 @@
 	}
 }
 @media screen {
+	body {
+		background-color: hsl(207, 24%, 30%);
+		background-image: url(images/relief_plaquemetallique_363x230.png);
+		& > h1 {
+			font-family: sf_proverbial_gothi;
+			font-size: 8em;
+			line-height: 1;
+			margin: 0;
+			text-align: center;
+			color: hsl(207, 24%, 30%);
+			text-shadow: 0 0 .125em white, 0 0 .25em white, 0 0 .5em white;
+			animation-name: flash;
+			animation-duration: 10s;
+			animation-iteration-count: 3;
+			animation-timing-function: step-end;
+			b {
+				display: inline-block;
+				transform: rotate(8deg);
+				animation-duration: 5s;
+			}
+		}
+	}
 	div.page {
+		background-color: white;
 		box-shadow: 0 0 1em;
 		margin: 0 auto;
 	}
@@ -140,5 +164,37 @@
 @media print {
 	body > *:not(.page) {
 		display: none;
+	}
+}
+@neon: 0 0 .125em rgba(255,255,255,.5), 0 0 .25em rgba(255,255,255,.5), 0 0 .5em rgba(255,255,255,.5);
+@neon-pale: 0 0 .125em rgba(255,255,255,.2), 0 0 .25em rgba(255,255,255,.2), 0 0 .5em rgba(255,255,255,.2);
+
+@keyframes flash {
+	0% {
+		text-shadow: @neon;
+	}
+	50% {
+		text-shadow: @neon;
+	}
+	50.5% {
+		text-shadow: @neon-pale;
+	}
+	52% {
+		text-shadow: @neon;
+	}
+	53.5% {
+		text-shadow: @neon-pale;
+	}
+	54% {
+		text-shadow: @neon;
+	}
+	63% {
+		text-shadow: @neon-pale;
+	}
+	64% {
+		text-shadow: @neon;
+	}
+	100% {
+		text-shadow: @neon;
 	}
 }
