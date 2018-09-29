@@ -1,0 +1,258 @@
+{
+	"titre": "Projet 1",
+	"valeur": 35,
+	"colonnes": 3,
+	"rangees": 1,
+	"orientation": "portrait",
+	"criteres": [
+		{
+			"titre": "Contenu et structure",
+			"valeur": 0,
+			"criteres": [
+				{
+					"titre": "Trois fichiers",
+					"valeur": 0,
+					"explication": "Le projet comporte les 3 fichiers demandés",
+					"criteres": []
+				},
+				{
+					"titre": "Noms de fichiers",
+					"valeur": 0,
+					"explication": "Les fichiers sont bien nommés",
+					"criteres": []
+				},
+				{
+					"titre": "Quantité de contenu",
+					"valeur": 0,
+					"explication": "Les articles sont assez longs",
+					"criteres": []
+				},
+				{
+					"titre": "Une seule feuille de styles",
+					"valeur": 0,
+					"explication": "Une seule feuille de styles gère tous les fichiers",
+					"criteres": []
+				},
+				{
+					"titre": "Fichier style.css",
+					"valeur": 0,
+					"explication": "Le fichier \"style.css\" a été adapté",
+					"criteres": []
+				}
+			]
+		},
+		{
+			"titre": "Découpage",
+			"valeur": 0,
+			"criteres": [
+				{
+					"titre": "Paragraphes",
+					"valeur": 0,
+					"explication": "Les paragraphes correspondent à l'article original",
+					"criteres": []
+				},
+				{
+					"titre": "Titres",
+					"valeur": 0,
+					"explication": "Les titres ont la bonne hiérarchie",
+					"criteres": []
+				},
+				{
+					"titre": "Liens",
+					"valeur": 0,
+					"explication": "Comporte 20 liens",
+					"criteres": []
+				},
+				{
+					"titre": "Images",
+					"valeur": 0,
+					"explication": "",
+					"criteres": [
+						{
+							"titre": "balise figure",
+							"valeur": 0,
+							"explication": "Utilisent la balise figure",
+							"criteres": []
+						},
+						{
+							"titre": "légende",
+							"valeur": 0,
+							"explication": "Comportent une légende",
+							"criteres": []
+						},
+						{
+							"titre": "adresse absolue",
+							"valeur": 0,
+							"explication": "Les adresses sont absolues",
+							"criteres": []
+						}
+					]
+				},
+				{
+					"titre": "Sections",
+					"valeur": 0,
+					"explication": "Les balises de sections sont présentes et bien utilisées",
+					"criteres": [
+						{
+							"titre": "header, footer",
+							"valeur": 0,
+							"explication": "",
+							"criteres": []
+						},
+						{
+							"titre": "nav, aside, section",
+							"valeur": 0,
+							"explication": "",
+							"criteres": []
+						},
+						{
+							"titre": "\"content\", \"pub\"",
+							"valeur": 0,
+							"explication": "",
+							"criteres": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"titre": "Éléments",
+			"valeur": 0,
+			"criteres": [
+				{
+					"titre": "La signature",
+					"valeur": 0,
+					"explication": "",
+					"criteres": [
+						{
+							"titre": "fichier signature.png",
+							"valeur": 0,
+							"explication": "Affiche l'image de la signature",
+							"criteres": []
+						},{
+							"titre": "pointe vers TIM",
+							"valeur": 0,
+							"explication": "Le lien est correct",
+							"criteres": []
+						},{
+							"titre": "dans une nouvelle fenêtre",
+							"valeur": 0,
+							"explication": "Le lien s'ouvre dans une nouvelle fenêtre",
+							"criteres": []
+						}
+					]
+				},
+				{
+					"titre": "Le menu",
+					"valeur": 0,
+					"explication": "",
+					"criteres": [
+						{
+							"titre": "3 liens locaux",
+							"valeur": 0,
+							"explication": "Les liens vers les fichiers",
+							"criteres": []
+						},{
+							"titre": "Adresses relatives",
+							"valeur": 0,
+							"explication": "Les adresses sont relatives",
+							"criteres": []
+						},{
+							"titre": "3 autres liens",
+							"valeur": 0,
+							"explication": "Comporte 3 liens absolus",
+							"criteres": []
+						},{
+							"titre": "Page courante",
+							"valeur": 0,
+							"explication": "La page courante est identifiée",
+							"criteres": []
+						}
+					]
+				},
+				{
+					"titre": "Les publicités",
+					"valeur": 0,
+					"explication": "",
+					"criteres": [
+						{
+							"titre": "images",
+							"valeur": 0,
+							"explication": "Les images des publicités sont présentes",
+							"criteres": []
+						},{
+							"titre": "mènent vers TIM",
+							"valeur": 0,
+							"explication": "Les publicités pointent vers TIM",
+							"criteres": []
+						}
+					]
+				},
+				{
+					"titre": "Le copyright",
+					"valeur": 0,
+					"explication": "",
+					"criteres": [
+						{
+							"titre": "Entité &copy;",
+							"valeur": 0,
+							"explication": "L'entité a été ajoutée",
+							"criteres": []
+						},{
+							"titre": "Pointe vers l'article",
+							"valeur": 0,
+							"explication": "Le lien est correct",
+							"criteres": []
+						},{
+							"titre": "dans une nouvelle fenêtre",
+							"valeur": 0,
+							"explication": "Le lien s'ouvre dans une nouvelle fenêtre",
+							"criteres": []
+						}
+					]
+				},
+				{
+					"titre": "L'accueil",
+					"valeur": 0,
+					"explication": "",
+					"criteres": [
+						{
+							"titre": "images et titres",
+							"valeur": 0,
+							"explication": "Affiche une image et le titre de chaque article",
+							"criteres": []
+						},{
+							"titre": "liens",
+							"valeur": 0,
+							"explication": "Pointe vers le bon article",
+							"criteres": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"titre": "Autres critères",
+			"valeur": 0,
+			"criteres": [
+				{
+					"titre": "Qualité du code",
+					"valeur": 0,
+					"explication": "Utilisation des bonnes balises dans le bon ordre",
+					"criteres": []
+				},
+				{
+					"titre": "Indentation",
+					"valeur": 0,
+					"explication": "Le code est bien indenté",
+					"criteres": []
+				}
+			]
+		},
+		{
+			"titre": "Commentaires",
+			"valeur": 0,
+			"criteres": []
+		}
+	]
+}
