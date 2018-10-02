@@ -1,5 +1,5 @@
 {
-	"titre": "Projet 1",
+	"titre": "Projet 1 - Wiki",
 	"valeur": 35,
 	"colonnes": 3,
 	"rangees": 1,
@@ -185,6 +185,11 @@
 							"valeur": 0,
 							"explication": "Les publicités pointent vers TIM",
 							"criteres": []
+						},{
+							"titre": "dans une nouvelle fenêtre",
+							"valeur": 0,
+							"explication": "Le lien s'ouvre dans une nouvelle fenêtre",
+							"criteres": []
 						}
 					]
 				},
@@ -202,11 +207,6 @@
 							"titre": "Pointe vers l'article",
 							"valeur": 0,
 							"explication": "Le lien est correct",
-							"criteres": []
-						},{
-							"titre": "dans une nouvelle fenêtre",
-							"valeur": 0,
-							"explication": "Le lien s'ouvre dans une nouvelle fenêtre",
 							"criteres": []
 						}
 					]
@@ -252,6 +252,7 @@
 		{
 			"titre": "Commentaires",
 			"valeur": 0,
+			"lignes": 3,
 			"criteres": []
 		}
 	]

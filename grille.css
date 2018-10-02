@@ -34,6 +34,32 @@
     display: grid;
     grid-template: repeat(var(--rangees), 1fr) / repeat(var(--colonnes), 1fr);
   }
+  div.identification {
+    border: 1px solid black;
+    min-height: 2em;
+    order: 1;
+    display: flex;
+    font-size: smaller;
+    font-weight: bold;
+    align-items: flex-end;
+    border-radius: .25em;
+    line-height: .8;
+    padding: 0;
+    color: #999;
+    margin-bottom: .5em;
+  }
+  div.identification::before {
+    content: "Élève";
+    flex: 1 0 0;
+  }
+  div.identification[data-pts]::after {
+    content: "/" attr(data-pts);
+    flex: 0 1 10ch;
+    text-align: right;
+  }
+  div.titre {
+    order: 0;
+  }
   div.grille {
     display: flex;
     flex: 1 1 auto;
@@ -50,6 +76,7 @@
     padding: 0;
     list-style-type: none;
     counter-reset: no;
+    order: 10;
   }
   div.grille li {
     display: flex;
@@ -70,7 +97,6 @@
     font-weight: bold;
     font-family: arial;
     font-size: 1.2em;
-    margin-top: 1em;
   }
   div.grille.niveau-1 > div.titre::before {
     content: counter(no, decimal) ". ";
@@ -133,7 +159,9 @@
 @media screen {
   body {
     background-color: #3a4e5f;
-    background-image: url(images/relief_plaquemetallique_363x230.png);
+    background-image: url(images/huile.png), url(images/relief_plaquemetallique_363x230.png);
+    background-repeat: no-repeat, repeat;
+    background-position: 1em 5em;
   }
   body > h1 {
     font-family: sf_proverbial_gothi;
@@ -142,21 +170,23 @@
     margin: 0;
     text-align: center;
     color: #3a4e5f;
-    text-shadow: 0 0 .125em white, 0 0 .25em white, 0 0 .5em white;
-    animation-name: flash;
-    animation-duration: 10s;
-    animation-iteration-count: 3;
-    animation-timing-function: step-end;
+    text-shadow: 0 0 0.1em #a3c0f5, 0 0 0.25em #a3c0f5, 0 0 1em #a3c0f5;
   }
   body > h1 b {
-    display: inline-block;
-    transform: rotate(8deg);
+    animation-name: flash;
     animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: step-end;
+    animation-fill-mode: both;
+    animation-direction: alternate;
+    display: inline-block;
+    transform: translate(0, 0.1em) rotate(18deg);
   }
   div.page {
     background-color: white;
     box-shadow: 0 0 1em;
     margin: 0 auto;
+    position: relative;
   }
 }
 @media print {
@@ -166,30 +196,27 @@
 }
 @keyframes flash {
   0% {
-    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.5), 0 0 0.25em rgba(255, 255, 255, 0.5), 0 0 0.5em rgba(255, 255, 255, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.5), 0 0 0.25em rgba(255, 255, 255, 0.5), 0 0 0.5em rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 0.1em #a3c0f5, 0 0 0.25em #a3c0f5, 0 0 1em #a3c0f5;
   }
   50.5% {
-    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.2), 0 0 0.25em rgba(255, 255, 255, 0.2), 0 0 0.5em rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 0.1em rgba(163, 192, 245, 0.2), 0 0 0.25em rgba(163, 192, 245, 0.2), 0 0 1em rgba(163, 192, 245, 0.2);
   }
   52% {
-    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.5), 0 0 0.25em rgba(255, 255, 255, 0.5), 0 0 0.5em rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 0.1em #a3c0f5, 0 0 0.25em #a3c0f5, 0 0 1em #a3c0f5;
   }
   53.5% {
-    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.2), 0 0 0.25em rgba(255, 255, 255, 0.2), 0 0 0.5em rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 0.1em rgba(163, 192, 245, 0.2), 0 0 0.25em rgba(163, 192, 245, 0.2), 0 0 1em rgba(163, 192, 245, 0.2);
   }
   54% {
-    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.5), 0 0 0.25em rgba(255, 255, 255, 0.5), 0 0 0.5em rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 0.1em #a3c0f5, 0 0 0.25em #a3c0f5, 0 0 1em #a3c0f5;
   }
-  63% {
-    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.2), 0 0 0.25em rgba(255, 255, 255, 0.2), 0 0 0.5em rgba(255, 255, 255, 0.2);
+  73% {
+    text-shadow: 0 0 0.1em rgba(163, 192, 245, 0.2), 0 0 0.25em rgba(163, 192, 245, 0.2), 0 0 1em rgba(163, 192, 245, 0.2);
   }
-  64% {
-    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.5), 0 0 0.25em rgba(255, 255, 255, 0.5), 0 0 0.5em rgba(255, 255, 255, 0.5);
+  74% {
+    text-shadow: 0 0 0.1em #a3c0f5, 0 0 0.25em #a3c0f5, 0 0 1em #a3c0f5;
   }
   100% {
-    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.5), 0 0 0.25em rgba(255, 255, 255, 0.5), 0 0 0.5em rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 0.1em #a3c0f5, 0 0 0.25em #a3c0f5, 0 0 1em #a3c0f5;
   }
 }

@@ -21,9 +21,12 @@ class Critere {
 		}
 	}
 	get dom() {
-		if (this._dom) {
-			return this._dom;
+		if (!this._dom) {
+			this._dom = this.dom_creer();
 		}
+		return this._dom;
+	}
+	dom_creer() {
 		var resultat = document.createElement("div");
 		resultat.classList.add("grille");
 		resultat.classList.add("niveau-" + this.niveau);
@@ -35,11 +38,10 @@ class Critere {
 		}
 		if (this._criteres.length) {
 			resultat.appendChild(this.dom_criteres());
+		} else if (this.lignes) {
+			resultat.appendChild(this.dom_lignes(this.lignes));
 		} else {
 			resultat.classList.add("leaf");
-		}
-		if (this.lignes) {
-			resultat.appendChild(this.dom_lignes(this.lignes));
 		}
 		resultat.obj = this;
 		return resultat;
@@ -214,6 +216,13 @@ class Grille extends Critere {
 			"largeur": this.largeur + "in",
 			"hauteur": this.hauteur + "in",
 		});
+	}
+	dom_creer() {
+		var resultat = super.dom_creer();
+		var id = resultat.appendChild(document.createElement("div"));
+		id.classList.add("identification");
+		id.setAttribute("data-pts", this.valeur);
+		return resultat;
 	}
 	static setVariable(name, value) {
 		this.styles.root.setProperty("--" + name, value);
