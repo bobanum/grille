@@ -104,7 +104,6 @@ class Critere {
 		return resultat;
 	}
 	ajouterCritere(critere) {
-//		console.log(critere);
 		if (critere instanceof Critere) {
 			this._criteres.push(critere);
 			critere.parent = this;
@@ -197,13 +196,11 @@ class Grille extends Critere {
 	set orientation(val) {
 		var vals = [this.largeur, this.hauteur];
 		vals.sort((a,b)=>(a<b)?-1:1);
-//		console.log(val, vals);
 		if (val === "paysage") {
 			vals.reverse();
 		}
 		this.largeur = vals[0];
 		this.hauteur = vals[1];
-//		console.log(val, vals);
 		Grille.setVariables({
 			"largeur": this.largeur + "in",
 			"hauteur": this.hauteur + "in",
@@ -278,6 +275,16 @@ class Grille extends Critere {
 	static init() {
 		var regles = {"root": ":root{}", "body": "body {}", "page": "div.page {}", "feuillet": "div.feuillet {}"};
 		this.ajouterStyle(regles);
+		if (location.pathname.endsWith("/index.html")) {
+			if (location.search) {
+				this.load(location.search.substr(1) + ".json");
+			} else {
+				this.load().then(() => {
+					document.getElementById("interface").innerHTML = '<h1>Ajouter <code style="font-weight:lighter;">?mon_projet</code> à l\'adresse pour le faire afficher</h1>';
+
+				});
+			}
+		}
 	}
 }
 Grille.init();
