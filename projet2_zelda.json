@@ -1,0 +1,151 @@
+{
+	"titre": "Projet Zelda",
+	"valeur": 35,
+	"colonnes": 4,
+	"orientation": "portrait",
+	"criteres": [
+		{
+			"titre": "Général",
+			"valeur": 10,
+			"criteres": [
+				{
+					"titre": "Qualité visuelle et effort",
+					"valeur": 4
+				},
+				{
+					"titre": "Mise en forme des sections (en-tête, pied, colonnes, etc.)",
+					"valeur": 3
+				},
+				{
+					"titre": "Mise en forme du texte (paragraphes, sous-titres, etc.)",
+					"valeur": 3
+				}
+			]
+		},
+		{
+			"titre": "Éléments obligatoires",
+			"valeur": 11,
+			"criteres": [
+				{
+					"titre": "Feuille <code>reset.css</code>",
+					"valeur": 1
+				},
+				{
+					"titre": "Arrière-plan qui se répète ou dégradé",
+					"valeur": 1
+				},
+				{
+					"titre": "Arrière-plan qui non répété",
+					"valeur": 1
+				},
+				{
+					"titre": "Ombre sur le titre",
+					"valeur": 1
+				},
+				{
+					"titre": "Largeur fixe et centré",
+					"valeur": 1
+				},
+				{
+					"titre": "Colonnes ou menu horizontal",
+					"valeur": 1
+				},
+				{
+					"titre": "4 éléments cachés (1&nbsp;règle)",
+					"valeur": 2
+				},
+				{
+					"titre": "Mise en forme des liens",
+					"valeur": 1
+				},
+				{
+					"titre": "2 polices personnalisées",
+					"valeur": 2
+				}
+			]
+		},
+		{
+			"titre": "Le menu",
+			"valeur": 5,
+			"criteres": [
+				{
+					"titre": "Mise en forme personnalisée",
+					"valeur": 2
+				},
+				{
+					"titre": "Affichage des sous-menus",
+					"valeur": 2
+				},
+				{
+					"titre": "Survol de la souris",
+					"valeur": 1
+				}
+			]
+		},
+		{
+			"titre": "Les figure et figcaption",
+			"valeur": 4,
+			"criteres": [
+				{
+					"titre": "Mise en forme",
+					"valeur": 1
+				},
+				{
+					"titre": "Bordure",
+					"valeur": 1
+				},
+				{
+					"titre": "Ombre",
+					"valeur": 1
+				},
+				{
+					"titre": "Float",
+					"valeur": 1
+				}
+			]
+		},
+		{
+			"titre": "Qualité du code",
+			"valeur": 3,
+			"criteres": [
+				{
+					"titre": "Règles en ordre de priorité",
+					"valeur": 2
+				},
+				{
+					"titre": "Règles bien indentées",
+					"valeur": 1
+				}
+			]
+		},
+		{
+			"titre": "Pénalités",
+			"valeur": 0,
+			"criteres": [
+				{
+					"titre": "Fichier CSS non identifié",
+					"valeur": 0
+				},
+				{
+					"titre": "CSS en dehors de <code>zelda.css</code>",
+					"valeur": 0
+				},
+				{
+					"titre": "Images en dehors du dossier images",
+					"valeur": 0
+				},
+				{
+					"titre": "Mauvais nom de remise",
+					"valeur": 0
+				}
+			]
+		},
+		{
+			"titre": "Commentaires",
+			"lignes": 4,
+			"criteres": [
+
+			]
+		}
+	]
+}

@@ -1,0 +1,24 @@
+@font-face {
+	font-family: sf_proverbial_gothi;
+	src: url("SF%20Proverbial%20Gothic.ttf");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: sf_proverbial_gothi;
+	src: url("SF%20Proverbial%20Gothic%20Oblique.ttf");
+	font-weight: normal;
+	font-style: italic;
+}
+@font-face {
+	font-family: sf_proverbial_gothi;
+	src: url("SF%20Proverbial%20Gothic%20Bold.ttf");
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: sf_proverbial_gothi;
+	src: url("SF%20Proverbial%20Gothic%20Bold%20Oblique.ttf");
+	font-weight: bold;
+	font-style: italic;
+}
