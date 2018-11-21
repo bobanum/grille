@@ -1,0 +1,92 @@
+{
+	"titre": "Minitest Boutons",
+	"valeur": null,
+	"colonnes": 3,
+	"rangees": 1,
+	"orientation": "paysage",
+	"criteres": [
+		{
+			"titre": "Utilisation des polices",
+			"valeur": null,
+			"criteres": [
+				{
+					"titre": "Importée",
+					"valeur": 3
+				}, {
+					"titre": "Appliquée",
+					"valeur": 2
+				}
+			]
+		}, {
+			"titre": "Disposition horizontale",
+			"valeur": null,
+			"criteres": [
+				{
+					"titre": "Flex quelque part",
+					"valeur": 3
+				}, {
+					"titre": "Appliqué au bon élément",
+					"valeur": 2
+				}, {
+					"titre": "Résultat voulu",
+					"valeur": 1
+				}
+			]
+		}, {
+			"titre": "Comportement des boutons (survol et clique de la souris)",
+			"valeur": null,
+			"criteres": [
+				{
+					"titre": "Pseudo-class :hover et :focus quelque part ",
+					"valeur": 4
+				}, {
+					"titre": "Appliquée aux bons éléments",
+					"valeur": 2
+				}, {
+					"titre": "Tous les états",
+					"valeur": 1
+				}
+			]
+		}, {
+			"titre": "Allure des boutons (police, tailles, couleurs...)",
+			"valeur": null,
+			"criteres": [
+				{
+					"titre": "Propriété background-image appliquée quelque part",
+					"valeur": 5
+				}, {
+					"titre": "Appliquée aux bons éléments",
+					"valeur": 2
+				}, {
+					"titre": "Utilisation du background-position",
+					"valeur": 1
+				}, {
+					"titre": "Autres aspects : font-size, width et height, centré...",
+					"valeur": 3
+				}
+			]
+		}, {
+			"titre": "Intégration à la page (ne change pas le reste de la page)",
+			"valeur": null,
+			"criteres": [
+				{
+					"titre": "Les sélecteurs sont assez spécifiques",
+					"valeur": 3
+				}
+			]
+		}, {
+			"titre": "Qualité et disposition du code CSS",
+			"valeur": null,
+			"criteres": [
+				{
+					"titre": "Bonne indentation; ordre des règles correct",
+					"valeur": 3
+				}
+			]
+		}, {
+			"titre": "Commentaires",
+			"lignes": 4,
+			"criteres": []
+		}
+	]
+}

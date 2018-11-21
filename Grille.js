@@ -2,7 +2,7 @@
 class Critere {
 	constructor() {
 		this._titre = "";
-		this.valeur = 0;
+		this._valeur = null;
 		this._criteres = [];
 		this.lignes = 0;
 		this.parent = null;
@@ -12,6 +12,15 @@ class Critere {
 	}
 	set criteres(val) {
 		this.ajouterCritere(val);
+	}
+	get valeur() {
+		if (this._valeur === null) {
+			return this.valeurCriteres();
+		}
+		return this._valeur;
+	}
+	set valeur(val) {
+		this._valeur = val;
 	}
 	get niveau() {
 		if (!this.parent) {
@@ -25,6 +34,11 @@ class Critere {
 			this._dom = this.dom_creer();
 		}
 		return this._dom;
+	}
+	valeurCriteres() {
+		var resultat = 0;
+		resultat = this.criteres.reduce((t, c) => t + c.valeur, 0);
+		return resultat;
 	}
 	dom_creer() {
 		var resultat = document.createElement("div");
@@ -90,6 +104,7 @@ class Critere {
 		return resultat;
 	}
 	ajouterCritere(critere) {
+//		console.log(critere);
 		if (critere instanceof Critere) {
 			this._criteres.push(critere);
 			critere.parent = this;
@@ -101,7 +116,7 @@ class Critere {
 		} else if (typeof critere === "string") {
 			return this.ajouterCritere(Critere.fromJson(critere));
 		} else {
-			throw "Mauvaise valeur pour un critere";
+			throw "Mauvaise valeur pour un critere : ";
 		}
 	}
 	fill(obj) {
@@ -117,27 +132,6 @@ class Critere {
 		var resultat = new this();
 		resultat.fill(obj);
 		return resultat;
-	}
-	static load(fichierJson, nb) {
-		return Grille.loadJson("config.json").then(config => {
-			this.config = config;
-		}).then(() => Grille.loadJson(fichierJson)).then(data => {
-			return Grille.fromObject(data);
-		}).then(grille => {
-			nb = nb || 1;
-			return new Promise(resolve => {
-				window.addEventListener("load", () => {
-					var dom = grille.dom;
-					window.interface.appendChild(dom);
-					for (let i = 1; i < nb; i += 1) {
-						window.interface.appendChild(dom.cloneNode(true));
-					}
-					resolve(grille);
-				});
-			});
-		}).then(/*data => {
-			console.log(data);
-		}*/);
 	}
 	static init() {
 	}
@@ -158,7 +152,6 @@ class Grille extends Critere {
 	set colonnes(val) {
 		this._colonnes = val;
 		Grille.setVariable("colonnes", this._colonnes);
-//		Grille.styles.page.gridTemplateColumns = "repeat(" + this._colonnes + ", 1fr)";
 	}
 	get rangees() {
 		return this._rangees;
@@ -166,7 +159,6 @@ class Grille extends Critere {
 	set rangees(val) {
 		this._rangees = val;
 		Grille.setVariable("rangees", this._rangees);
-//		Grille.styles.page.gridTemplateRows = "repeat(" + this._rangees + ", 1fr)";
 	}
 	get papier() {
 		return this.width + "in " + this.height + "in";
@@ -205,13 +197,13 @@ class Grille extends Critere {
 	set orientation(val) {
 		var vals = [this.largeur, this.hauteur];
 		vals.sort((a,b)=>(a<b)?-1:1);
-		console.log(val, vals);
+//		console.log(val, vals);
 		if (val === "paysage") {
 			vals.reverse();
 		}
 		this.largeur = vals[0];
 		this.hauteur = vals[1];
-		console.log(val, vals);
+//		console.log(val, vals);
 		Grille.setVariables({
 			"largeur": this.largeur + "in",
 			"hauteur": this.hauteur + "in",
@@ -244,25 +236,36 @@ class Grille extends Critere {
 		});
 	}
 	static load(fichierJson) {
-		return this.loadJson("config.json").then(config => {
-			this.config = config;
-		}).then(() => this.loadJson(fichierJson)).then(data => {
-			return this.fromObject(data);
-		}).then(grille => {
-			var nb = grille.colonnes * grille.rangees;
-			return new Promise(resolve => {
-				window.addEventListener("load", () => {
-					var dom = grille.dom;
-					window.interface.appendChild(dom);
-					for (let i = 1; i < nb; i += 1) {
-						window.interface.appendChild(dom.cloneNode(true));
-					}
-					resolve(grille);
-				});
+		var promises = [];
+		promises.push(new Promise(resolve =>{
+			window.addEventListener("load", () => {
+				resolve();
 			});
-		}).then(/*data => {
-			console.log(data);
-		}*/);
+		}));
+		promises.push(this.loadJson("config.json").then(config => {
+			this.config = config;
+			return config;
+		}));
+		if (fichierJson) {
+			promises.push(this.loadJson(fichierJson).then(data => {
+				return this.fromObject(data);
+			}));
+		}
+		return Promise.all(promises).then(data => {
+			if (data[2]) {
+				var grille = data[2];
+				grille.ajouterA(document.getElementById('interface'));
+				return grille;
+			}
+		});
+	}
+	ajouterA(element) {
+		var nb = this.colonnes * this.rangees;
+		var dom = this.dom;
+		element.appendChild(dom);
+		for (let i = 1; i < nb; i += 1) {
+			window.interface.appendChild(dom.cloneNode(true));
+		}
 	}
 	static ajouterStyle(regles) {
 		var style= document.head.appendChild(document.createElement("style"));

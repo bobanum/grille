@@ -1,7 +1,7 @@
 {
-	"titre": "Projet Zelda",
+	"titre": "Projet Halloween",
 	"valeur": 35,
-	"colonnes": 4,
+	"colonnes": 3,
 	"orientation": "portrait",
 	"criteres": [
 		{
@@ -35,7 +35,7 @@
 					"valeur": 1
 				},
 				{
-					"titre": "Arrière-plan qui non répété",
+					"titre": "Arrière-plan non répété",
 					"valeur": 1
 				},
 				{
