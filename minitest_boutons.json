@@ -1,5 +1,5 @@
 {
-	"titre": "Minitest Boutons",
+	"titre": "Minitest: Boutons",
 	"valeur": null,
 	"colonnes": 3,
 	"rangees": 1,
@@ -33,14 +33,14 @@
 				}
 			]
 		}, {
-			"titre": "Comportement des boutons (survol et clique de la souris)",
+			"titre": "Comportement des boutons (survol et clic de la souris)",
 			"valeur": null,
 			"criteres": [
 				{
-					"titre": "Pseudo-class :hover et :focus quelque part ",
+					"titre": "Pseudo-classes :hover et :focus quelque part ",
 					"valeur": 4
 				}, {
-					"titre": "Appliquée aux bons éléments",
+					"titre": "Appliquées aux bons éléments",
 					"valeur": 2
 				}, {
 					"titre": "Tous les états",
