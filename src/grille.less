@@ -1,4 +1,3 @@
-@import url(images/sf_proverbial_gothi/style.css);
 :root {
 	--largeur: 8.5in;
 	--hauteur: 11in;
@@ -159,33 +158,6 @@
 	}
 }
 @media screen {
-	body {
-		background-color: hsl(207, 24%, 30%);
-//		background-image: url(images/pinces.png), url(images/relief_plaquemetallique_363x230.png);
-		background-image: url(images/huile.png), url(images/relief_plaquemetallique_363x230.png);
-		background-repeat: no-repeat, repeat;
-		background-position: 1em 5em;
-		& > h1 {
-			font-family: sf_proverbial_gothi;
-			font-size: 8em;
-			line-height: 1;
-			margin: 0;
-			text-align: center;
-			color: hsl(207, 24%, 30%);
-			text-shadow: @neon;
-			b {
-			animation-name: flash;
-			animation-duration: 5s;
-			animation-iteration-count: infinite;
-//			animation-iteration-count: 4;
-			animation-timing-function: step-end;
-			animation-fill-mode: both;
-			animation-direction: alternate;
-				display: inline-block;
-				transform: translate(0, .1em) rotate(18deg);
-			}
-		}
-	}
 	div.page {
 		background-color: white;
 		box-shadow: 0 0 1em;
@@ -197,42 +169,5 @@
 @media print {
 	body > *:not(.page) {
 		display: none;
-	}
-}
-@neon:
-	0 0 .1em hsla(219, 80%, 80%,1),
-	0 0 .25em hsla(219, 80%, 80%,1),
-	0 0 1em hsla(219, 80%, 80%,1)
-	;
-@neon-pale:
-	0 0 .1em hsla(219, 80%, 80%,.2),
-	0 0 .25em hsla(219, 80%, 80%,.2),
-	0 0 1em hsla(219, 80%, 80%,.2)
-	;
-
-@keyframes flash {
-	0% {
-		text-shadow: @neon;
-	}
-	50.5% {
-		text-shadow: @neon-pale;
-	}
-	52% {
-		text-shadow: @neon;
-	}
-	53.5% {
-		text-shadow: @neon-pale;
-	}
-	54% {
-		text-shadow: @neon;
-	}
-	73% {
-		text-shadow: @neon-pale;
-	}
-	74% {
-		text-shadow: @neon;
-	}
-	100% {
-		text-shadow: @neon;
 	}
 }
