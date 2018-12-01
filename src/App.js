@@ -56,17 +56,17 @@ class App {
 		return object;
 	}
 	static setAttributes(element, attrs) {
-			var k;
-			attrs = attrs || {};
-			for (k in attrs) {
-				if (attrs[k] === undefined) {
-					element.removeAttribute(k);
-				} else {
-					element.setAttribute(k, attrs[k]);
-				}
+		var k;
+		attrs = attrs || {};
+		for (k in attrs) {
+			if (attrs[k] === undefined) {
+				element.removeAttribute(k);
+			} else {
+				element.setAttribute(k, attrs[k]);
 			}
-			return this;
 		}
+		return this;
+	}
 	/**
 	 * Transfere les attributs d'un objet à un autre
 	 * @param   {object} src  - L'objet duquel prendre les attributs
@@ -211,8 +211,8 @@ class App {
 		var dossierPage = window.location.href.split("/").slice(0, -1);
 		this._pathPage = dossierPage.join("/");
 		var src = document.currentScript.getAttribute("src").split("/").slice(0, -1);
-        if (src.length > 0 && src[0] === "") {
-			src[0] = dossierPage.slice(0,3).join("/");
+		if (src.length > 0 && src[0] === "") {
+			src[0] = dossierPage.slice(0, 3).join("/");
 		}
 		if (src.length === 0 || !src[0].startsWith("http")) {
 			src = dossierPage.concat(src).filter(x => x !== ".");
@@ -282,14 +282,19 @@ class App {
 			xhr.open("get", fic);
 			xhr.responseType = "json";
 			xhr.addEventListener("load", (e) => {
+				console.log("ok");
 				resolve(e.target.response);
+			});
+			xhr.addEventListener("error", (e) => {
+				console.log(123,e);
+				resolve("e.target.response");
 			});
 			xhr.send(null);
 		});
 	}
 	static loadScripts(scripts) {
 		console.trace(this.name, "loadScripts", scripts);
-		return Promise.all(scripts.map(m => this.addScript(m))).then(data =>  {
+		return Promise.all(scripts.map(m => this.addScript(m))).then(data => {
 			console.trace(this.name, "loaded", scripts, data);
 			return Promise.all(scripts.map(m => (!this[m] || !this[m].load) ? null : this[m].load()));
 		});
@@ -303,8 +308,12 @@ class App {
 			'Critere.js',
 			'Grille.js',
 		];
-		return this.loadScripts(scripts).then(data => {
+		return Promise.all([
+			this.loadScripts(scripts),
+			this.loadJson("eleves.json")
+		]).then(data => {
 			console.trace("Scripts chargés", data);
+			this.eleves = data[1];
 			this._loaded = true;
 		});
 	}
@@ -318,7 +327,7 @@ class App {
 		]);
 		this.addFavicon();
 		new Promise(resolve => {
-			window.addEventListener("load", ()=>resolve());
+			window.addEventListener("load", () => resolve());
 		}).then(() => {
 			console.trace("Page HTML chargée");
 			this.load();

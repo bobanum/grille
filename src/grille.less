@@ -32,26 +32,45 @@
 		display: grid;
 		grid-template: repeat(var(--rangees), 1fr) e('/') repeat(var(--colonnes), 1fr);
 	}
+	div.page + div.page {
+		page-break-before: always;
+	}
 	div.identification {
 		border: 1px solid black;
 		min-height: 2em;
 		order:1;
 		display: flex;
-		font-size: smaller;
-		font-weight: bold;
-		align-items: flex-end;
+		align-items: center;
+		justify-content: space-between;
 		border-radius: .25em;
 		line-height: .8;
-		padding: 0;
-		color: #999;
+		padding: .5ch;
 		margin-bottom: .5em;
+		& > span {
+			flex: 1 0 0px;
+			font-size: 1.5em;
+			font-family: arial;
+			margin: 0 1ch;
+			text-align: center;
+			font-style: italic;
+		}
+		span.nom {
+			font-weight: normal;
+		}
+		&::before, &::after {
+			font-size: smaller;
+			font-weight: bold;
+			color: #999;
+		}
 		&::before {
+			align-self: flex-start;
 			content: "Élève";
-			flex: 1 0 0;
+			flex: 0 0 auto;
 		}
 		&[data-pts]::after {
+			align-self: flex-end;
 			content: "/" attr(data-pts);
-			flex: 0 1 10ch;
+			flex: 0 0 10ch;
 			text-align: right;
 		}
 	}
@@ -163,6 +182,9 @@
 		box-shadow: 0 0 1em;
 		margin: 0 auto;
 		position: relative;
+	}
+	div.page + div.page {
+		margin-top: 2em;
 	}
 
 }

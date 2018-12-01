@@ -85,7 +85,7 @@
 					"titre": "Les sélecteurs sont assez spécifiques (ne changent pas le reste de la page)",
 					"valeur": 2
 				}, {
-					"titre": "La couleur du body en hexadécimal",
+					"titre": "La couleur du body est slategray en hexadécimal (#708090)",
 					"valeur": 1
 				}
 			]

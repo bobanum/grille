@@ -5,7 +5,7 @@
     background-color: #3a4e5f;
     background-image: url(images/huile.png), url(images/relief_plaquemetallique_363x230.png);
     background-repeat: no-repeat, repeat;
-    background-position: 1em 5em;
+    background-position: 1em 5em, 0 0;
   }
   body > h1 {
     font-family: sf_proverbial_gothi;

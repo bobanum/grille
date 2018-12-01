@@ -42,7 +42,7 @@ class Grille extends Critere {
 			this.hauteur = val[1];
 		}
 		if (this.orientation) {
-			this.orientation = this.orientation;	// Pour juster les hargeurs et hauteurs
+			this.orientation = this.orientation; // Pour juster les hargeurs et hauteurs
 		}
 		Grille.setVariables({
 			"largeur": this.largeur + "in",
@@ -58,7 +58,7 @@ class Grille extends Critere {
 	}
 	set orientation(val) {
 		var vals = [this.largeur, this.hauteur];
-		vals.sort((a,b)=>(a<b)?-1:1);
+		vals.sort((a, b) => (a < b) ? -1 : 1);
 		if (val === "paysage") {
 			vals.reverse();
 		}
@@ -98,7 +98,7 @@ class Grille extends Critere {
 		return Promise.all(promises).then(data => {
 			var grille = data[1];
 			if (grille) {
-				grille.ajouterA(document.getElementById('interface'));
+				grille.ajouterA(document.body);
 				return grille;
 			}
 		});
@@ -106,18 +106,55 @@ class Grille extends Critere {
 	ajouterA(element) {
 		var nb = this.colonnes * this.rangees;
 		var dom = this.dom;
-		element.appendChild(dom);
-		for (let i = 1; i < nb; i += 1) {
-			window.interface.appendChild(dom.cloneNode(true));
+		if (!App.eleves) {
+			let page = Grille.ajouterPage(element);
+			page.appendChild(dom);
+			for (let i = 1; i < nb; i += 1) {
+				page.appendChild(dom.cloneNode(true));
+			}
+		} else {
+			var n = 0;
+			let page;
+			for (let matricule in App.eleves) {
+				if (matricule[0] === "") {
+					continue;
+				}
+				let eleve = App.eleves[matricule];
+				if (n % nb === 0) {
+					page = Grille.ajouterPage(element);
+				}
+				let g = dom.cloneNode(true);
+				let span = g.querySelector("div.identification").appendChild(document.createElement("span"));
+				span.innerHTML = '<span class="prenom">'+eleve.prenom + '</span> <span class="nom">' + eleve.nom+'</span>';
+				page.appendChild(g);
+				n++;
+			}
+
 		}
 	}
+	static ajouterPage(conteneur) {
+		var resultat = conteneur.appendChild(document.createElement("div"));
+		resultat.classList.add("interface");
+		resultat.classList.add("page");
+		return resultat;
+	}
 	static ajouterStyle(regles) {
-		var style= document.head.appendChild(document.createElement("style"));
+		var style = document.head.appendChild(document.createElement("style"));
 		style.innerHTML = Object.values(regles).join(" ");
 		this.styles = {};
 		Object.keys(regles).forEach((r, i) => {
 			this.styles[r] = style.sheet.cssRules[i].style;
 		});
+	}
+	static listeGrilles(liste) {
+		var resultat = document.createElement("ol");
+		liste.forEach(g => {
+			var li = resultat.appendChild(document.createElement("li"));
+			var a = li.appendChild(document.createElement("a"));
+			a.setAttribute("href", "?" + g);
+			a.innerHTML = g;
+		});
+		return resultat;
 	}
 	static init() {
 		this.ajouterStyle({
@@ -126,17 +163,23 @@ class Grille extends Critere {
 			"page": "div.page {}",
 			"feuillet": "div.feuillet {}",
 		});
-		if (location.pathname.endsWith("/index.html")) {
+		if (location.pathname.endsWith("/index.html") || location.pathname.endsWith("/")) {
 			if (location.search) {
 				this.load(location.search.substr(1) + ".json");
 			} else {
 				this.load().then(() => {
-					document.getElementById("interface").innerHTML = '<h1>Ajouter <code style="font-weight:lighter;">?mon_projet</code> à l\'adresse pour le faire afficher</h1>';
-
+					var page = this.ajouterPage(document.body);
+					var div = page.appendChild(document.createElement("div"));
+					div.innerHTML = '<h1>Ajouter <code style="font-weight:lighter;">?mon_projet</code> à l\'adresse pour le faire afficher</h1>';
+					App.loadJson("api.php?g").then(data => {
+						if (!data) {
+							return false;
+						}
+						div.appendChild(this.listeGrilles(data));
+					});
 				});
 			}
 		}
 	}
 }
 Grille.init();
-
