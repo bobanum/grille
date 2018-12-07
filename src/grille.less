@@ -47,16 +47,54 @@
 		line-height: .8;
 		padding: .5ch;
 		margin-bottom: .5em;
-		& > span {
+		&[data-pts]::after {
+			align-self: flex-end;
+			content: "/" attr(data-pts);
+			flex: 0 0 15ch;
+			text-align: right;
+		}
+		span.eleve {
 			flex: 1 0 0px;
-			font-size: 1.5em;
+			align-items: flex-end;
 			font-family: arial;
 			margin: 0 1ch;
-			text-align: center;
 			font-style: italic;
-		}
-		span.nom {
-			font-weight: normal;
+			display: flex;
+			justify-content: space-between;
+			.nom, .prenom {
+				font-size: 1.5em;
+				flex: 1 0 0px;
+				text-align: right;
+			}
+			.prenom + .nom {
+				text-align: left;
+				&::before {
+					content: " ";
+					flex: 1 0 0px;
+				}
+			}
+			.nom + .prenom {
+				text-align: left;
+				&::before {
+					content: ", ";
+				}
+			}
+			span.groupe {
+				font-size: 1em;
+				&::after {
+					content: " : ";
+				}
+			}
+			span.matricule {
+				font-size: 1em;
+				quotes: "" "";
+				&::before {
+					content: open-quote;
+				}
+				&::after {
+					content: close-quote;
+				}
+			}
 		}
 		&::before, &::after {
 			font-size: smaller;
@@ -67,12 +105,6 @@
 			align-self: flex-start;
 			content: "Élève";
 			flex: 0 0 auto;
-		}
-		&[data-pts]::after {
-			align-self: flex-end;
-			content: "/" attr(data-pts);
-			flex: 0 0 10ch;
-			text-align: right;
 		}
 	}
 	div.titre {

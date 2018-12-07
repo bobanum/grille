@@ -49,16 +49,55 @@
     padding: .5ch;
     margin-bottom: .5em;
   }
-  div.identification > span {
+  div.identification[data-pts]::after {
+    align-self: flex-end;
+    content: "/" attr(data-pts);
+    flex: 0 0 15ch;
+    text-align: right;
+  }
+  div.identification span.eleve {
     flex: 1 0 0px;
-    font-size: 1.5em;
+    align-items: flex-end;
     font-family: arial;
     margin: 0 1ch;
-    text-align: center;
     font-style: italic;
+    display: flex;
+    justify-content: space-between;
   }
-  div.identification span.nom {
-    font-weight: normal;
+  div.identification span.eleve .nom,
+  div.identification span.eleve .prenom {
+    font-size: 1.5em;
+    flex: 1 0 0px;
+    text-align: right;
+  }
+  div.identification span.eleve .prenom + .nom {
+    text-align: left;
+  }
+  div.identification span.eleve .prenom + .nom::before {
+    content: " ";
+    flex: 1 0 0px;
+  }
+  div.identification span.eleve .nom + .prenom {
+    text-align: left;
+  }
+  div.identification span.eleve .nom + .prenom::before {
+    content: ", ";
+  }
+  div.identification span.eleve span.groupe {
+    font-size: 1em;
+  }
+  div.identification span.eleve span.groupe::after {
+    content: " : ";
+  }
+  div.identification span.eleve span.matricule {
+    font-size: 1em;
+    quotes: "" "";
+  }
+  div.identification span.eleve span.matricule::before {
+    content: open-quote;
+  }
+  div.identification span.eleve span.matricule::after {
+    content: close-quote;
   }
   div.identification::before,
   div.identification::after {
@@ -70,12 +109,6 @@
     align-self: flex-start;
     content: "Élève";
     flex: 0 0 auto;
-  }
-  div.identification[data-pts]::after {
-    align-self: flex-end;
-    content: "/" attr(data-pts);
-    flex: 0 0 10ch;
-    text-align: right;
   }
   div.titre {
     order: 0;

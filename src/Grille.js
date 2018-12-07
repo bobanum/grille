@@ -119,22 +119,37 @@ class Grille extends Critere {
 		} else {
 			var n = 0;
 			let page;
-			for (let matricule in App.eleves) {
-				if (matricule[0] === "") {
-					continue;
+			for (let groupe in App.eleves) {
+				let eleves = App.eleves[groupe];
+				for (let matricule in eleves) {
+					if (matricule[0] === "_") {
+						continue;
+					}
+					let eleve = eleves[matricule];
+					eleve.groupe = groupe;
+					eleve.matricule = matricule;
+					if (n % nb === 0) {
+						page = Grille.ajouterPage(element);
+					}
+					let g = dom.cloneNode(true);
+					g.querySelector("div.identification").appendChild(this.identitication(eleve));
+					page.appendChild(g);
+					n++;
 				}
-				let eleve = App.eleves[matricule];
-				if (n % nb === 0) {
-					page = Grille.ajouterPage(element);
-				}
-				let g = dom.cloneNode(true);
-				let span = g.querySelector("div.identification").appendChild(document.createElement("span"));
-				span.innerHTML = '<span class="prenom">'+eleve.prenom + '</span> <span class="nom">' + eleve.nom+'</span>';
-				page.appendChild(g);
-				n++;
 			}
 
 		}
+	}
+	identitication(eleve) {
+		var resultat, info;
+		resultat = document.createElement("span");
+		resultat.classList.add("eleve");
+		for (let k in eleve) {
+			info = resultat.appendChild(document.createElement("span"));
+			info.classList.add(k);
+			info.innerHTML = eleve[k];
+		}
+		return resultat;
 	}
 	static ajouterPage(conteneur) {
 		var resultat = conteneur.appendChild(document.createElement("div"));
