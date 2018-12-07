@@ -2,33 +2,43 @@
 /*eslint no-console:0*/
 //Fonction permettant de suire le chargements des promesses. Mettre false pour masquer les traces.
 /* eslint-disable */
-console.trace = (true) ? console.log : function () {};
+console.trace = (false) ? console.log : function () {};
 /* eslint-enable */
 
 /**
  * Classe gérant l'application en général. Seule script à inclure dans la page.
  */
 class App {
-	static cfg(name, value) {
-		if (arguments.length === 2) {
-			this._config[name] = value;
-		} else if (typeof name === "object") {
-			for (let k in name) {
-				this.cfg(k, name[k]);
-			}
-		} else {
-			return this._config[name];
+	static get config() {
+		var result = {};
+		this.configurables.forEach(property => {
+			result[property] = this[property];
+		});
+		for (let property in this._config) {
+			result[property] = this._config[property];
+		}
+		return result;
+	}
+	static set config(obj) {
+		for (let property in obj) {
+			this.setConfig(property, obj[property]);
 		}
 	}
-	static getConfig(name, defaultValue = undefined) {
-		if (this._config[name] === undefined) {
+	static getConfig(property, defaultValue = undefined) {
+		if (this.configurables.includes(property)) {
+			return this[property];
+		} else if (this._config[property] !== undefined) {
+			return this._config[property];
+		} else {
 			return defaultValue;
-		} else {
-			return this._config[name];
 		}
 	}
-	static setConfig(name, value) {
-		this._config[name] = value;
+	static setConfig(property, value) {
+		if (this.configurables.includes(property)) {
+			this[property] = value;
+		} else {
+			this._config[property] = value;
+		}
 	}
 	static addEventListeners(object, events) {
 		if (object instanceof Array) {
@@ -276,20 +286,53 @@ class App {
 		document.head.appendChild(resultat);
 		return resultat;
 	}
-	static loadJson(fic) {
-		return new Promise(resolve => {
+	static loadJson(fic, defaultValue = null) {
+		return new Promise((resolve) => {
 			var xhr = new XMLHttpRequest();
 			xhr.open("get", fic);
 			xhr.responseType = "json";
 			xhr.addEventListener("load", (e) => {
-				console.log("ok");
-				resolve(e.target.response);
+				if (e.target.status === 404) {
+					resolve(defaultValue);
+				} else {
+					resolve(e.target.response);
+				}
 			});
-			xhr.addEventListener("error", (e) => {
-				console.log(123,e);
-				resolve("e.target.response");
-			});
-			xhr.send(null);
+//			xhr.addEventListener("error", (e) => {
+//				resolve(e.target.response);
+//			});
+//			console.log(xhr.onerror);
+			xhr.onerror = function(){
+				console.log("error" + xhr.status);
+			};
+//			debugger;
+			xhr.upload.onloadstart = function(){
+				console.log("onloadstart" + xhr.status);
+			};
+			xhr.upload.onloadend = function(){
+				console.log("onloadend" + xhr.status);
+			};
+			xhr.upload.onerror = function(){
+				console.log("error" + xhr.status);
+			};
+			try {
+				xhr.send(null);
+			} catch (err) {
+				console.log(err);
+				resolve(err);
+			}
+		});
+	}
+	static loadEleves(fic) {
+		return this.loadJson(fic).then(data => {
+			this.eleves = data;
+			return data;
+		});
+	}
+	static loadConfig() {
+		return this.loadJson("config.json").then(data => {
+			this.config = data;
+			return data;
 		});
 	}
 	static loadScripts(scripts) {
@@ -310,15 +353,16 @@ class App {
 		];
 		return Promise.all([
 			this.loadScripts(scripts),
-			this.loadJson("eleves.json")
+			this.loadEleves(this.fichierEleves)
 		]).then(data => {
 			console.trace("Scripts chargés", data);
-			this.eleves = data[1];
 			this._loaded = true;
 		});
 	}
 	static init() {
 		console.trace(this.name, "init");
+		this.fichierEleves = "eleves.json";
+		this.configurables = ["titre", "fichierEleves"];
 		this._config = {};
 		this.setPaths();
 		this.data = this.parseSearch(window.location.search);
@@ -326,10 +370,14 @@ class App {
 			'grille.css',
 		]);
 		this.addFavicon();
-		new Promise(resolve => {
-			window.addEventListener("load", () => resolve());
-		}).then(() => {
-			console.trace("Page HTML chargée");
+		var promesses = [
+			this.loadConfig(),
+			new Promise(resolve => {
+				window.addEventListener("load", () => resolve());
+			})
+		];
+		Promise.all(promesses).then(() => {
+			console.trace(this, "Page HTML chargée");
 			this.load();
 		});
 	}

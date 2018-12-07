@@ -5,6 +5,7 @@
 	--colonnes: 1;
 	--rangees: 1;
 	--orientation: portrait;
+	--colonnesInternes: 1;
 }
 .encadre {
 	border: 1px solid black;
@@ -106,6 +107,14 @@
 				font-weight: bold;
 				font-family: arial;
 				font-size: 2em;
+			}
+			& > ol {
+//				Spécifique au synthese. Valider pour les autres
+				display:grid;
+				grid-template-columns: repeat(var(--colonnesInternes), 1fr);
+				grid-gap: 1em;
+				justify-content: space-between;
+				align-content: space-between;
 			}
 		}
 		&.niveau-1 {

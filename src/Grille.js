@@ -7,6 +7,7 @@ class Grille extends Critere {
 		this.orientation = "portrait";
 		this.colonnes = 2;
 		this.rangees = 1;
+		this.colonnesInternes = 1;
 	}
 	get colonnes() {
 		return this._colonnes;
@@ -14,6 +15,13 @@ class Grille extends Critere {
 	set colonnes(val) {
 		this._colonnes = val;
 		Grille.setVariable("colonnes", this._colonnes);
+	}
+	get colonnesInternes() {
+		return this._colonnesInternes;
+	}
+	set colonnesInternes(val) {
+		this._colonnesInternes = val;
+		Grille.setVariable("colonnesInternes", this._colonnesInternes);
 	}
 	get rangees() {
 		return this._rangees;
@@ -86,17 +94,13 @@ class Grille extends Critere {
 	}
 	static load(fichierJson) {
 		var promises = [];
-		promises.push(App.loadJson("config.json").then(config => {
-			this.config = config;
-			return config;
-		}));
 		if (fichierJson) {
 			promises.push(App.loadJson(fichierJson).then(data => {
 				return this.fromObject(data);
 			}));
 		}
 		return Promise.all(promises).then(data => {
-			var grille = data[1];
+			var grille = data[0];
 			if (grille) {
 				grille.ajouterA(document.body);
 				return grille;

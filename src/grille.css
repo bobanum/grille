@@ -6,6 +6,7 @@
   --colonnes: 1;
   --rangees: 1;
   --orientation: portrait;
+  --colonnesInternes: 1;
 }
 .encadre {
   border: 1px solid black;
@@ -111,6 +112,13 @@
     font-weight: bold;
     font-family: arial;
     font-size: 2em;
+  }
+  div.grille.niveau-0 > ol {
+    display: grid;
+    grid-template-columns: repeat(var(--colonnesInternes), 1fr);
+    grid-gap: 1em;
+    justify-content: space-between;
+    align-content: space-between;
   }
   div.grille.niveau-1 > div.titre {
     font-weight: bold;
