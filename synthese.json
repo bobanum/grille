@@ -7,6 +7,11 @@
 	"rangees": 1,
 	"colonnesInternes": 2,
 	"orientation": "portrait",
+	"zzzstyle": {
+		".page *": {
+			"background-color": "red"
+		}
+	},
 	"criteres": [
 		{
 			"titre": "Évaluation",

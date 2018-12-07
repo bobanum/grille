@@ -9,6 +9,13 @@ class Grille extends Critere {
 		this.rangees = 1;
 		this.colonnesInternes = 1;
 	}
+	get style() {
+		return (this._style) ? this._style.innerHTML : "";
+	}
+	set style(val) {
+		this._style = document.head.appendChild(document.createElement("style"));
+		this._style.innerHTML = this.renderStyle(val);
+	}
 	get colonnes() {
 		return this._colonnes;
 	}
@@ -84,6 +91,30 @@ class Grille extends Critere {
 		id.setAttribute("data-pts", this.valeur);
 		return resultat;
 	}
+	renderStyle(obj) {
+		if (typeof obj === "string") {
+			return obj;
+		} else if (obj instanceof Array) {
+			return obj.join("");
+		}
+		var result = "";
+		for (let k in obj) {
+			result += k + "{" + this.renderRule(obj[k]) + "}";
+		}
+		return result;
+	}
+	renderRule(obj) {
+		if (typeof obj === "string") {
+			return obj;
+		} else if (obj instanceof Array) {
+			return obj.join("");
+		}
+		var result = "";
+		for (let k in obj) {
+			result += k + ":" + this.renderRule(obj[k]) + ";";
+		}
+		return result;
+	}
 	static setVariable(name, value) {
 		this.styles.root.setProperty("--" + name, value);
 	}
@@ -120,6 +151,10 @@ class Grille extends Critere {
 			var n = 0;
 			let page;
 			for (let groupe in App.eleves) {
+				if (groupe[0] === "_") {
+					continue;
+				}
+
 				let eleves = App.eleves[groupe];
 				for (let matricule in eleves) {
 					if (matricule[0] === "_") {
