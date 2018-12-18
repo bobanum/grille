@@ -1,6 +1,7 @@
 :root {
 	--largeur: 8.5in;
 	--hauteur: 11in;
+	--marges: .25in;
 	--hauteur-trou: 14pt;
 	--colonnes: 1;
 	--rangees: 1;
@@ -14,7 +15,7 @@
 }
 @page {
 	size: var(--largeur) var(--hauteur);
-	margin: 0;
+	margin:0;
 }
 @media all {
 	html {
@@ -28,10 +29,12 @@
 		padding: 0;
 	}
 	div.page {
+		box-sizing: border-box;
 		width: var(--largeur);
 		height: var(--hauteur);
 		display: grid;
 		grid-template: repeat(var(--rangees), 1fr) e('/') repeat(var(--colonnes), 1fr);
+		padding: var(--marges);
 	}
 	div.page + div.page {
 		page-break-before: always;
@@ -47,11 +50,21 @@
 		line-height: .8;
 		padding: .5ch;
 		margin-bottom: .5em;
-		&[data-pts]::after {
+		/* &[data-pts]::after {
 			align-self: flex-end;
 			content: "/" attr(data-pts);
 			flex: 0 0 15ch;
 			text-align: right;
+		} */
+		&[data-pts]::after {
+			align-self: stretch;
+			content: "/" attr(data-pts);
+			flex: 0 0 20ch;
+			text-align: right;
+			border-left: 1px solid black;
+			display: flex;
+			align-items: flex-end;
+			justify-content: flex-end;
 		}
 		span.eleve {
 			flex: 1 0 0px;
@@ -134,8 +147,10 @@
 		}
 		&.niveau-0 {
 			flex-direction: column;
-			margin: .25in;
+			zzzmargin: .25in;
 			& > div.titre {
+				display: flex;
+				justify-content: space-between;
 				font-weight: bold;
 				font-family: arial;
 				font-size: 2em;
@@ -223,6 +238,7 @@
 		box-shadow: 0 0 1em;
 		margin: 0 auto;
 		position: relative;
+		padding: var(--marges);
 	}
 	div.page + div.page {
 		margin-top: 2em;

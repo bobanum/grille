@@ -77,7 +77,12 @@ class Critere {
 	dom_titre() {
 		var resultat = document.createElement("div");
 		resultat.classList.add("titre");
-		resultat.innerHTML = this.titre;
+		var titre = this.titre.split("|");
+		titre.forEach(t => {
+			var span = resultat.appendChild(document.createElement('span'));
+			span.innerHTML = t;
+//			resultat.innerHTML = this.titre;
+		});
 		return resultat;
 	}
 	dom_lignes(lignes) {

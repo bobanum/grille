@@ -35,7 +35,7 @@
 			"nom": "Galarneau",
 			"prenom": "Jana"
 		},
-		"1839623": {
+		"---1839623": {
 			"groupe": "101",
 			"nom": "Gauthier-Robert",
 			"prenom": "Sebastien-Junior"
@@ -70,12 +70,12 @@
 			"nom": "Morin",
 			"prenom": "Gabriel"
 		},
-		"1834905": {
+		"---1834905": {
 			"groupe": "101",
 			"nom": "Morrisson",
 			"prenom": "Samuel"
 		},
-		"1525605": {
+		"---1525605": {
 			"groupe": "101",
 			"nom": "Renaud",
 			"prenom": "Tristan-William"
@@ -105,7 +105,7 @@
 			"nom": "St-Onge",
 			"prenom": "Lukas"
 		},
-		"1873921": {
+		"---1873921": {
 			"groupe": "101",
 			"nom": "Verreault",
 			"prenom": "Tristan"
@@ -122,7 +122,7 @@
 			"nom": "Coupal",
 			"prenom": "Jeffrey"
 		},
-		"1642646": {
+		"---1642646": {
 			"groupe": "102",
 			"nom": "Gagnon",
 			"prenom": "Olivier"
@@ -132,12 +132,12 @@
 			"nom": "Gauthier Fréchette",
 			"prenom": "Myriam"
 		},
-		"1870631": {
+		"---1870631": {
 			"groupe": "102",
 			"nom": "Lauzon",
 			"prenom": "Jagger"
 		},
-		"1829851": {
+		"---1829851": {
 			"groupe": "102",
 			"nom": "Lavoie",
 			"prenom": "Benjamin"
@@ -229,7 +229,7 @@
 			"nom": "Gauthier Fréchette",
 			"prenom": "Audrey"
 		},
-		"1756274": {
+		"---1756274": {
 			"groupe": "103",
 			"nom": "Lalumière",
 			"prenom": "Mylène"
@@ -249,7 +249,7 @@
 			"nom": "Laramée",
 			"prenom": "Sébastien"
 		},
-		"1846894": {
+		"---1846894": {
 			"groupe": "103",
 			"nom": "Leon",
 			"prenom": "Adrian"
@@ -286,7 +286,7 @@
 		}
 	},
 	"Groupe 104, mardi": {
-		"1755036": {
+		"---1755036": {
 			"groupe": "104",
 			"nom": "Arroub",
 			"prenom": "Zakaria"
@@ -296,12 +296,12 @@
 			"nom": "Auger",
 			"prenom": "Mickael"
 		},
-		"1833787": {
+		"---1833787": {
 			"groupe": "104",
 			"nom": "Barrette",
 			"prenom": "Edouard"
 		},
-		"1549530": {
+		"---1549530": {
 			"groupe": "104",
 			"nom": "Charbonneau",
 			"prenom": "Noémie"
@@ -311,7 +311,7 @@
 			"nom": "Deguire",
 			"prenom": "Yoann"
 		},
-		"6130775": {
+		"---6130775": {
 			"groupe": "104",
 			"nom": "Forero-Bulnes",
 			"prenom": "Alexis"
@@ -321,12 +321,12 @@
 			"nom": "Giroux",
 			"prenom": "Jimmy"
 		},
-		"1837660": {
+		"---1837660": {
 			"groupe": "104",
 			"nom": "Labre",
 			"prenom": "Jessica"
 		},
-		"9031826": {
+		"---9031826": {
 			"groupe": "104",
 			"nom": "Landry",
 			"prenom": "Catherine"

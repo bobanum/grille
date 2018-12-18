@@ -99,7 +99,11 @@ class Grille extends Critere {
 		}
 		var result = "";
 		for (let k in obj) {
-			result += k + "{" + this.renderRule(obj[k]) + "}";
+			if (k === "") {
+				result += this.renderRule(obj[k]);
+			} else {
+				result += k + "{" + this.renderRule(obj[k]) + "}";
+			}
 		}
 		return result;
 	}
@@ -156,13 +160,21 @@ class Grille extends Critere {
 				}
 
 				let eleves = App.eleves[groupe];
+				/*Pour éviter le tri par clé*/
+
+				var eleves2 = [];
 				for (let matricule in eleves) {
 					if (matricule[0] === "_") {
 						continue;
 					}
-					let eleve = eleves[matricule];
-					eleve.groupe = groupe;
-					eleve.matricule = matricule;
+					eleves[matricule].groupe = groupe;
+					eleves[matricule].matricule = matricule;
+					eleves2.push(eleves[matricule]);
+				}
+				eleves2.sort((eleveA, eleveB) => {
+					return (eleveA.nom < eleveB.nom) ? -1 : (eleveA.nom > eleveB.nom) ? 1 : (eleveA.prenom < eleveB.prenom) ? -1 : (eleveA.prenom > eleveB.prenom) ? 1 : 0;
+				});
+				eleves2.forEach(eleve => {
 					if (n % nb === 0) {
 						page = Grille.ajouterPage(element);
 					}
@@ -170,9 +182,8 @@ class Grille extends Critere {
 					g.querySelector("div.identification").appendChild(this.identitication(eleve));
 					page.appendChild(g);
 					n++;
-				}
+				});
 			}
-
 		}
 	}
 	identitication(eleve) {
