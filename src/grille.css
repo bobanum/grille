@@ -3,9 +3,10 @@
   --largeur: 8.5in;
   --hauteur: 11in;
   --marges: .25in;
-  --hauteur-trou: 14pt;
+  --hauteur-trou: 16pt;
   --colonnes: 1;
   --rangees: 1;
+  --gap: .5in;
   --orientation: portrait;
   --colonnesInternes: 1;
 }
@@ -35,6 +36,7 @@
     height: var(--hauteur);
     display: grid;
     grid-template: repeat(var(--rangees), 1fr) / repeat(var(--colonnes), 1fr);
+    grid-gap: var(--gap);
     padding: var(--marges);
   }
   div.page + div.page {
@@ -61,7 +63,7 @@
   div.identification[data-pts]::after {
     align-self: stretch;
     content: "/" attr(data-pts);
-    flex: 0 0 20ch;
+    flex: 0 0 12ch;
     text-align: right;
     border-left: 1px solid black;
     display: flex;
@@ -145,10 +147,21 @@
     order: 10;
   }
   div.grille li {
+    min-height: 1.7em;
     display: flex;
     flex: 1 0 auto;
     counter-increment: no;
     justify-content: space-between;
+  }
+  div.grille div.titre {
+    display: flex;
+    justify-content: space-between;
+  }
+  div.grille div.titre::before {
+    display: none;
+  }
+  div.grille div.titre *[data-pts]::before {
+    content: "/" attr(data-pts);
   }
   div.grille.niveau-0 {
     flex-direction: column;
@@ -161,17 +174,23 @@
     font-family: arial;
     font-size: 2em;
   }
+  div.grille.niveau-0 > div.titre .valeur {
+    display: none;
+  }
   div.grille.niveau-0 > ol {
     display: grid;
     grid-template-columns: repeat(var(--colonnesInternes), 1fr);
     grid-gap: 1em;
     justify-content: space-between;
-    align-content: space-between;
+    align-items: flex-start;
   }
   div.grille.niveau-1 > div.titre {
+    background-color: #d9d9d9;
+    padding: .25ch;
     font-weight: bold;
     font-family: arial;
     font-size: 1.2em;
+    margin-bottom: .2ch;
   }
   div.grille.niveau-1 > div.titre::before {
     content: counter(no, decimal) ". ";
@@ -191,6 +210,7 @@
     flex-direction: row-reverse;
     align-items: center;
     line-height: .9em;
+    border-bottom: 1px solid #999;
   }
   div.grille.leaf > div.titre {
     flex: 1 1 0;
@@ -214,6 +234,27 @@
   }
   div.grille.leaf > div.valeur[data-pts='0']::after {
     content: "\a0";
+  }
+  .coches {
+    --bordure: .5px solid black;
+    order: -1;
+    display: flex;
+    border: var(--bordure);
+    border-radius: 1em;
+    padding: 0 .5ch;
+  }
+  .coches > * {
+    font-size: smaller;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 1em;
+    height: 1.3em;
+    line-height: .8;
+  }
+  .coches > * + * {
+    border-left: var(--bordure);
   }
   div.lignes {
     border: 1px solid black;
