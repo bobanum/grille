@@ -67,7 +67,7 @@ class Critere {
 		if (!val) {
 			this._titre = "";
 		} else if (typeof val === "string") {
-			this._titre = val.replace(/§/g, "<br/>");
+			this._titre = val.replace(/(?:§|¶|\r\n|\n\r|\r|\n)/g, "<br/>");
 		} else if (val instanceof HTMLElement) {
 			this.titre = val.innerHTML;
 		} else {

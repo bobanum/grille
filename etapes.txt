@@ -1,0 +1,142 @@
+=================================================================
+Les routes
+=================================================================
+
+Ajouter la route vers l'administration des commentaires d'un user
+    
+Elle répond à une adresse ressemblant à 
+http://localhost:8000/admin/users/999/commentaires
+    
+Elle exécute l'action 'commentaires' du controller 'UserController'
+-----------------------------------------------------------------
+Ajouter la route vers la suppression d'un commentaire
+    
+Elle répond à une adresse ressemblant à 
+http://localhost:8000/admin/commentaires/999/destroy
+    
+Elle exécute l'action 'destroy' du controller 'CommentaireController'
+
+
+
+=================================================================
+Les controllers
+=================================================================
+
+CommentaireController
+    
+Nouveau fichier: Le fichier a déjà été créé avec la commande 'php artisan make:model Commentaire -mrc'.
+    
+Rien d'autre à faire pour l'instant
+
+-----------------------------------------------------------------
+UserController
+    
+Ajouter l'action "commentaires" à la fin du fichier, après l'action "destroy".
+        
+La méthode doit reçevoir un objet User en paramètre,
+ appeller la view "users.commentaires" et
+ envoyer le user au complet à la view
+
+
+=================================================================
+Les models
+=================================================================
+
+Le model Commentaire
+    
+Nouveau fichier: Le fichier a déjà été créé avec la commande 'php artisan make:model Commentaire -mrc'.
+    
+(Ajouter le faker. Déjà inclus.)
+    
+Lier avec le model "Post" afin de pouvoir récupérer le post 
+auquel appartient le commentaire en faisant $commentaire->post
+
+-----------------------------------------------------------------Le model Post
+    
+Lier avec le model "Commentaire" pour récupérer tous les commentaires 
+associés au post en faisant $post->commentaires
+
+-----------------------------------------------------------------
+Le model User
+    
+Lier avec le model "Commentaire" pour récupérer tous les commentaires associés aux posts du user en faisant $user->commentaire
+        
+On doit utiliser l'instruction suivante :
+ return $this->hasManyThrough('App\Commentaire', 'App\Post');
+
+=================================================================
+Les views
+=================================================================
+
+La view "posts.show"
+    
+Faire afficher les commentaires du post en utilisant comme base le HTML suivant:
+ 
+<div class="commentaires">
+
+	<h3>Les commentaires</h3>
+		<ul>
+			<li>
+				<div>
+					<a href="mailto:croy@villeneuve.info">croy@villeneuve.info</a>
+				</div>
+				
+<div>Baptiste qui passait, dans le fossé, et la tête une seule jambe, il fallut nous engager dans la.</div>
+			
+</li>
+		
+</ul>
+
+</div>
+
+-----------------------------------------------------------------
+La view "users.commentaires"
+    
+Créer le fichier de la view
+    
+Cette view doit utiliser la page maîtresse "interface.index"
+    
+Afficher les commentaires du user pour administration.
+    
+Utiliser comme base le HTML suivant:
+ 
+<div class="commentaires">
+	<ul>
+		
+<li>
+			<a href="http://localhost:8000/admin/commentaires/1/destroy">Supprimer</a>
+				<span>Baptiste qui passait, dans le fossé, et la tête une seule jambe, il fallut nous engager dans la.</span>
+				<span>(<em>croy@villeneuve.info</em>)</span>
+		
+</li>
+	
+</ul>
+</div>
+
+-----------------------------------------------------------------
+La view "users.show"
+    
+Ajouter le lien vers l'administration des commentaires en utilisant comme base le HTML suivant:
+ 
+<div>
+	<a href="http://localhost:8000/admin/users/1/commentaires">Administrer les commentaires</a>
+</div>
+
+=================================================================
+La migration "create_commentaires_table"
+=================================================================
+
+Nouveau fichier: Le fichier a déjà été créé avec la commande 'php artisan make:model Commentaire -mrc'.
+
+Ajouter les nouveaux champs de la migration de la table commentaires:
+ "post_id", "email" et "texte";
+
+
+=================================================================
+Le seeder "DatabaseSeeder"
+=================================================================
+
+Modifier le seeder.
+
+Pour chaque post, le seeder doit ajouter un nombre (aléatoire) 
+de commentaires en utilisant le faker.

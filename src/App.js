@@ -217,8 +217,19 @@ class App {
 		}
 		return result;
 	}
+	static path_data(file) {
+		var result = this._pathPage;
+        if (this.dataDir) {
+		  result += "/" + this.dataDir;
+        }
+		if (file) {
+			result += "/" + file;
+		}
+		return result;
+	}
 	static setPaths() {
-		var dossierPage = window.location.href.split("/").slice(0, -1);
+        var url = window.location.href.split("?")[0];
+		var dossierPage = url.split("/").slice(0, -1);
 		this._pathPage = dossierPage.join("/");
 		var src = document.currentScript.getAttribute("src").split("/").slice(0, -1);
 		if (src.length > 0 && src[0] === "") {
@@ -287,7 +298,7 @@ class App {
 		return resultat;
 	}
 	static loadJson(fic, defaultValue = null) {
-		return new Promise((resolve) => {
+        return new Promise((resolve) => {
 			var xhr = new XMLHttpRequest();
 			xhr.open("get", fic);
 			xhr.responseType = "json";
@@ -305,7 +316,6 @@ class App {
 			xhr.onerror = function(){
 				console.log("error" + xhr.status);
 			};
-//			debugger;
 			xhr.upload.onloadstart = function(){
 				console.log("onloadstart" + xhr.status);
 			};
@@ -324,13 +334,16 @@ class App {
 		});
 	}
 	static loadEleves(fic) {
-		return this.loadJson(fic).then(data => {
+		if (!fic) {
+            return Promise.resolve({});
+        }
+        return this.loadJson(fic).then(data => {
 			this.eleves = data;
 			return data;
 		});
 	}
 	static loadConfig() {
-		return this.loadJson("config.json").then(data => {
+		return this.loadJson(this.path_page("config.json")).then(data => {
 			this.config = data;
 			return data;
 		});
@@ -361,7 +374,8 @@ class App {
 	}
 	static init() {
 		console.trace(this.name, "init");
-		this.fichierEleves = "eleves.json";
+        this.dataDir = "data";
+		//this.fichierEleves = "eleves.json";
 		this.configurables = ["titre", "fichierEleves"];
 		this._config = {};
 		this.setPaths();

@@ -1,4 +1,5 @@
 {
 	"titre": "Grille de correction",
-	"fichierEleves": "eleves.js"
+	"dataDir": "data",
+	"fichierEleves_zzz": "eleves.js"
 }

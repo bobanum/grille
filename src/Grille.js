@@ -230,7 +230,7 @@ class Grille extends Critere {
 		});
 		if (location.pathname.endsWith("/index.html") || location.pathname.endsWith("/")) {
 			if (location.search) {
-				this.load(location.search.substr(1) + ".json");
+				this.load(App.path_data(location.search.substr(1) + ".json"));
 			} else {
 				this.load().then(() => {
 					var page = this.ajouterPage(document.body);

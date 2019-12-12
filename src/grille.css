@@ -2,12 +2,15 @@
 :root {
   --largeur: 8.5in;
   --hauteur: 11in;
-  --marges: .25in;
+  --marges-tb: .25in;
+  --marges-lr: .25in;
+  --marges: var(--marges-tb) var(--marges-lr) var(--marges-tb) var(--marges-lr);
   --hauteur-trou: 14pt;
   --colonnes: 1;
   --rangees: 1;
   --orientation: portrait;
   --colonnesInternes: 1;
+  --taille-police: 12pt;
 }
 .encadre {
   border: 1px solid black;
@@ -30,12 +33,14 @@
     padding: 0;
   }
   div.page {
+    font-size: var(--taille-police);
     box-sizing: border-box;
     width: var(--largeur);
     height: var(--hauteur);
     display: grid;
     grid-template: repeat(var(--rangees), 1fr) / repeat(var(--colonnes), 1fr);
     padding: var(--marges);
+    grid-gap: calc(2 * var(--marges-lr));
   }
   div.page + div.page {
     page-break-before: always;
