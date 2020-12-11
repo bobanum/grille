@@ -8,6 +8,8 @@ class Grille extends Critere {
 		this.colonnes = 2;
 		this.rangees = 1;
 		this.colonnesInternes = 1;
+		this.police = 12;
+		this.trou = 19;
 	}
 	get style() {
 		return (this._style) ? this._style.innerHTML : "";
@@ -22,6 +24,20 @@ class Grille extends Critere {
 	set colonnes(val) {
 		this._colonnes = val;
 		Grille.setVariable("colonnes", this._colonnes);
+	}
+	get police() {
+		return this._police;
+	}
+	set police(val) {
+		this._police = val;
+		Grille.setVariable("police", this._police);
+	}
+	get trou() {
+		return this._police;
+	}
+	set trou(val) {
+		this._trou = val;
+		Grille.setVariable("hauteur-trou", this._trou);
 	}
 	get colonnesInternes() {
 		return this._colonnesInternes;

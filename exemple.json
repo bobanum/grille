@@ -1,0 +1,110 @@
+{
+	"titre": "Exemple",
+	"colonnes": 3,
+	"rangees": 1,
+	"colonnesInternes": 1,
+	"valeur": null,
+	"orientation": "portrait",
+	"police": 12,
+	"trou": 19,
+	"criteres": [
+		{
+			"titre": "Étape 1 - rite",
+			"criteres": [
+				{
+					"titre": "tableau récupéré",
+					"valeur": 3
+				},
+				{
+					"titre": "div.pile créée ajoutée",
+					"valeur": 3
+				},
+				{
+					"titre": "img*x[src][alt] créées ajoutées",
+					"valeur": 6
+				},
+				{
+					"titre": "",
+					"lignes": 2
+				}
+			]
+		},
+		{
+			"titre": "Étape 2 - boucle",
+			"criteres": [	
+				{
+					"titre": "for...",
+					"valeur": 3
+				},
+				{
+					"titre": "instructions du for",
+					"valeur": 2
+				},
+				{
+					"titre": "nbCartes",
+					"valeur": 2
+				},
+				{
+					"titre": "sorte * 2",
+					"valeur": 2
+				},
+				{
+					"titre": "sequence (i) * 2",
+					"valeur": 2
+				},
+				{
+					"titre": "",
+					"lignes": 2
+				}
+			]
+		},
+		{
+			"titre": "Etape 3 - hasard",
+			"criteres": [
+				{
+					"titre": "if / else",
+					"valeur": 2
+				},
+				{
+					"titre": "random  (application de la formule)",
+					"valeur": 2
+				},
+				{
+					"titre": "Adaptation de l'affichage",
+					"valeur": 2
+				},
+				{
+					"titre": "",
+					"lignes": 2
+				}
+			]
+		},
+		{
+			"titre": "Étape 4 - formulaire",
+			"criteres": [
+				{
+					"titre": "Récupération du formulaire",
+					"valeur": 2
+				},
+				{
+					"titre": "Récupération des 3 champs ",
+					"valeur": 4
+				},
+				{
+					"titre": "",
+					"lignes": 2
+				}
+			]
+		},
+		{
+			"titre": "Étape bonus",
+			"valeur": 0,
+			"criteres": [
+				{
+					"titre": "fonctionnel",
+					"valeur": 0
+				}
+			]
+		}
+	]
+}

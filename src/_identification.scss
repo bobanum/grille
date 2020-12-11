@@ -1,0 +1,96 @@
+div.identification {
+    border: 1px solid black;
+    min-height: 2em;
+    order:1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .25em;
+    line-height: .8;
+    padding: .5ch;
+    margin-bottom: .5em;
+    /* &[data-pts]::after {
+        align-self: flex-end;
+        content: "/" attr(data-pts);
+        flex: 0 0 15ch;
+        text-align: right;
+    } */
+  &[data-pts]::after {
+     align-self: stretch;
+     content: "/"attr(data-pts);
+     flex: 0 0 12ch;
+     text-align: right;
+     border-left: 1px solid black;
+     display: flex;
+     align-items: flex-end;
+     justify-content: flex-end;
+  }
+
+  span.eleve {
+     flex: 1 0 0px;
+     align-items: flex-end;
+     font-family: arial;
+     margin: 0 1ch;
+     font-style: italic;
+     display: flex;
+     justify-content: space-between;
+
+     .nom,
+     .prenom {
+        font-size: 1.5em;
+        flex: 1 0 0px;
+        text-align: right;
+     }
+
+     .prenom + .nom {
+        text-align: left;
+
+        &::before {
+           content: " ";
+           flex: 1 0 0px;
+        }
+     }
+
+     .nom + .prenom {
+        text-align: left;
+
+        &::before {
+           content: ", ";
+        }
+     }
+
+     span.groupe {
+        font-size: 1em;
+
+        &::after {
+           content: " : ";
+        }
+     }
+
+     span.matricule {
+        font-size: 1em;
+        quotes: """";
+
+        &::before {
+           content: open-quote;
+        }
+
+        &::after {
+           content: close-quote;
+        }
+     }
+  }
+
+  &::before,
+  &::after {
+     font-size: smaller;
+     font-weight: bold;
+     color: #999;
+  }
+
+  &::before {
+     align-self: flex-start;
+     content: "Élève";
+     flex: 0 0 auto;
+  }
+}

@@ -291,7 +291,7 @@ class App {
 	 */
 	static addFavicon() {
 		var resultat = document.createElement('link');
-		resultat.setAttribute('href', this.path_script("favicon.svg"));
+		resultat.setAttribute('href', this.path_page("favicon.svg"));
 		resultat.setAttribute('rel', 'icon');
 		resultat.setAttribute('type', 'image/svg+xml');
 		document.head.appendChild(resultat);

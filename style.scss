@@ -1,4 +1,15 @@
 @import url(images/sf_proverbial_gothi/style.css);
+$neon:
+	0 0 .1em hsla(219, 80%, 80%,1),
+	0 0 .25em hsla(219, 80%, 80%,1),
+	0 0 1em hsla(219, 80%, 80%,1)
+	;
+$neon-pale:
+	0 0 .1em hsla(219, 80%, 80%,.2),
+	0 0 .25em hsla(219, 80%, 80%,.2),
+	0 0 1em hsla(219, 80%, 80%,.2)
+	;
+
 @media screen {
 	body {
 		background-color: hsl(207, 24%, 30%);
@@ -13,7 +24,7 @@
 			margin: 0;
 			text-align: center;
 			color: hsl(207, 24%, 30%);
-			text-shadow: @neon;
+			text-shadow: $neon;
 			b {
 			animation-name: flash;
 			animation-duration: 5s;
@@ -29,40 +40,29 @@
 	}
 
 }
-@neon:
-	0 0 .1em hsla(219, 80%, 80%,1),
-	0 0 .25em hsla(219, 80%, 80%,1),
-	0 0 1em hsla(219, 80%, 80%,1)
-	;
-@neon-pale:
-	0 0 .1em hsla(219, 80%, 80%,.2),
-	0 0 .25em hsla(219, 80%, 80%,.2),
-	0 0 1em hsla(219, 80%, 80%,.2)
-	;
-
 @keyframes flash {
 	0% {
-		text-shadow: @neon;
+		text-shadow: $neon;
 	}
 	50.5% {
-		text-shadow: @neon-pale;
+		text-shadow: $neon-pale;
 	}
 	52% {
-		text-shadow: @neon;
+		text-shadow: $neon;
 	}
 	53.5% {
-		text-shadow: @neon-pale;
+		text-shadow: $neon-pale;
 	}
 	54% {
-		text-shadow: @neon;
+		text-shadow: $neon;
 	}
 	73% {
-		text-shadow: @neon-pale;
+		text-shadow: $neon-pale;
 	}
 	74% {
-		text-shadow: @neon;
+		text-shadow: $neon;
 	}
 	100% {
-		text-shadow: @neon;
+		text-shadow: $neon;
 	}
 }
