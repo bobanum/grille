@@ -77,8 +77,8 @@
         align-self: stretch;
     content: "/" attr(data-pts);
     -webkit-box-flex: 0;
-        -ms-flex: 0 0 12ch;
-            flex: 0 0 12ch;
+        -ms-flex: 0 0 10ch;
+            flex: 0 0 10ch;
     text-align: right;
     border-left: 1px solid black;
     display: -webkit-box;
@@ -243,7 +243,8 @@
             justify-content: space-between;
     font-weight: bold;
     font-family: arial;
-    font-size: 2em;
+    font-size: 1.5em;
+    margin-bottom: .25em;
   }
   div.grille.niveau-0 > div.titre .valeur {
     display: none;

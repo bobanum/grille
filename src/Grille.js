@@ -1,6 +1,9 @@
 /*jslint esnext:true,browser:true*/
 /*global Critere, App */
 class Grille extends Critere {
+	/**
+	 * Creates an instance of Grille.
+	 */
 	constructor() {
 		super();
 		this.papier = "lettre";
@@ -9,8 +12,11 @@ class Grille extends Critere {
 		this.rangees = 1;
 		this.colonnesInternes = 1;
 		this.police = 12;
-		this.trou = 19;
+		this.trou = 18;
 	}
+	/**
+	 * Paramètre style du json
+	 */
 	get style() {
 		return (this._style) ? this._style.innerHTML : "";
 	}
@@ -73,7 +79,7 @@ class Grille extends Critere {
 			this.hauteur = val[1];
 		}
 		if (this.orientation) {
-			this.orientation = this.orientation; // Pour juster les hargeurs et hauteurs
+			this.orientation = this.orientation; // Pour ajuster les hargeurs et hauteurs
 		}
 		Grille.setVariables({
 			"largeur": this.largeur + "in",
@@ -100,13 +106,28 @@ class Grille extends Critere {
 			"hauteur": this.hauteur + "in",
 		});
 	}
+	/**
+	 * Retourne le HTML du feuillet
+	 */
 	dom_creer() {
 		var resultat = super.dom_creer();
-		var id = resultat.appendChild(document.createElement("div"));
-		id.classList.add("identification");
-		id.setAttribute("data-pts", this.valeur);
+		resultat.appendChild(this.html_identification(this.valeur));
 		return resultat;
 	}
+	/**
+	 * Retourne le HTML de la zone d'identification
+	 * @param {string} valeur La valeur du feuillet
+	 */
+	html_identification(valeur) {
+		var resultat = document.createElement("div");
+		resultat.classList.add("identification");
+		resultat.setAttribute("data-pts", valeur);
+		return resultat;
+	}
+	/**
+	 * Retourne le innerHTML à mettre dans une balise <style> en fonction de la feuille de styles donnée
+	 * @param {object|string|array} obj Le style à traiter
+	 */
 	renderStyle(obj) {
 		if (typeof obj === "string") {
 			return obj;
@@ -123,6 +144,10 @@ class Grille extends Critere {
 		}
 		return result;
 	}
+	/**
+	 * Retourne la version string d'une règle fournie
+	 * @param {object|string|array} obj La règle à traiter
+	 */
 	renderRule(obj) {
 		if (typeof obj === "string") {
 			return obj;
@@ -135,9 +160,19 @@ class Grille extends Critere {
 		}
 		return result;
 	}
+	
+	/**
+	 * Ajoute une variable CSS à la page
+	 * @param {string} name Le nom de la variable (sans les --)
+	 * @param {string} value La valeur à donner à la variable
+	 */
 	static setVariable(name, value) {
 		this.styles.root.setProperty("--" + name, value);
 	}
+	/**
+	 * Ajoute une série de variables CSS à la page
+	 * @param {object} vars Un objet contenant les propriété personnalisées (sans les --)
+	 */
 	static setVariables(vars) {
 		for (let i in vars) {
 			this.setVariable(i, vars[i]);
