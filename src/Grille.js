@@ -24,6 +24,9 @@ class Grille extends Critere {
 		this._style = document.head.appendChild(document.createElement("style"));
 		this._style.innerHTML = this.renderStyle(val);
 	}
+	/**
+	 * Détermine le nombre de feuillets à l'horizontal
+	 */
 	get colonnes() {
 		return this._colonnes;
 	}
@@ -31,27 +34,9 @@ class Grille extends Critere {
 		this._colonnes = val;
 		Grille.setVariable("colonnes", this._colonnes);
 	}
-	get police() {
-		return this._police;
-	}
-	set police(val) {
-		this._police = val;
-		Grille.setVariable("police", this._police);
-	}
-	get trou() {
-		return this._police;
-	}
-	set trou(val) {
-		this._trou = val;
-		Grille.setVariable("hauteur-trou", this._trou);
-	}
-	get colonnesInternes() {
-		return this._colonnesInternes;
-	}
-	set colonnesInternes(val) {
-		this._colonnesInternes = val;
-		Grille.setVariable("colonnesInternes", this._colonnesInternes);
-	}
+	/**
+	 * Détermine le nombre de feuillet à la verticale
+	 */
 	get rangees() {
 		return this._rangees;
 	}
@@ -59,6 +44,39 @@ class Grille extends Critere {
 		this._rangees = val;
 		Grille.setVariable("rangees", this._rangees);
 	}
+	/**
+	 * Détermine la taille générale de la police d'un feuillet
+	 */
+	get police() {
+		return this._police;
+	}
+	set police(val) {
+		this._police = val;
+		Grille.setVariable("police", this._police);
+	}
+	/**
+	 * Détermine la hauteur des zones inscriptibles
+	 */
+	get trou() {
+		return this._police;
+	}
+	set trou(val) {
+		this._trou = val;
+		Grille.setVariable("hauteur-trou", this._trou);
+	}
+	/**
+	 * Détermine le nombre à l'intérieur d'un feuillet (Pas très au point)
+	 */
+	get colonnesInternes() {
+		return this._colonnesInternes;
+	}
+	set colonnesInternes(val) {
+		this._colonnesInternes = val;
+		Grille.setVariable("colonnesInternes", this._colonnesInternes);
+	}
+	/**
+	 * Détermine la taille du papier
+	 */
 	get papier() {
 		return this.width + "in " + this.height + "in";
 	}
@@ -86,6 +104,9 @@ class Grille extends Critere {
 			"hauteur": this.hauteur + "in",
 		});
 	}
+	/**
+	 * Détermine l'orientation du papier (doit quand même être changé dans le fureteur)
+	 */
 	get orientation() {
 		if (this.largeur > this.hauteur) {
 			return "paysage";
@@ -178,24 +199,33 @@ class Grille extends Critere {
 			this.setVariable(i, vars[i]);
 		}
 	}
+	/**
+	 * Promesse qui charge un fichier de grille JSON
+	 * @param {string} fichierJson L'url du fichier à charger
+	 * @returns Promise resolves Grille
+	 */
 	static load(fichierJson) {
-		var promises = [];
-		if (fichierJson) {
-			promises.push(App.loadJson(fichierJson).then(data => {
-				return this.fromObject(data);
-			}));
+		if (!fichierJson) {
+			return Promise.resolve(this.fromObject(null));
 		}
-		return Promise.all(promises).then(data => {
-			var grille = data[0];
-			if (grille) {
-				grille.ajouterA(document.body);
-				return grille;
+		return App.loadJson(fichierJson).then(data => {
+			if (!data) {
+				throw("Grille json introuvable");
 			}
+			var grille = this.fromObject(data);
+			grille.ajouterA(document.body);
+			return grille;
 		});
 	}
+	/**
+	 * Ajoute les feuillets à un élément de la page
+	 * Permet également de "publiposter" une grande quantité de feuillets avec les noms des élèves (TODO simplifier)
+	 * @param {HTMLElement} element L'élément conteneur des feuillets (et page)
+	 */
 	ajouterA(element) {
 		var nb = this.colonnes * this.rangees;
 		var dom = this.dom;
+		console.log(this.eleves);
 		if (!App.eleves) {
 			let page = Grille.ajouterPage(element);
 			page.appendChild(dom);
@@ -230,38 +260,59 @@ class Grille extends Critere {
 						page = Grille.ajouterPage(element);
 					}
 					let g = dom.cloneNode(true);
-					g.querySelector("div.identification").appendChild(this.identitication(eleve));
+					g.querySelector("div.identification").appendChild(this.html_identitication(eleve, "eleve"));
 					page.appendChild(g);
 					n++;
 				});
 			}
 		}
 	}
-	identitication(eleve) {
+	/**
+	 * Retourne un span contenant d'autres spans avec des classes en fonction des propriétés de l'objet donné
+	 * @param {object} obj Un objet contenant les informations
+	 */
+	html_identitication(obj, classe) {
 		var resultat, info;
 		resultat = document.createElement("span");
-		resultat.classList.add("eleve");
-		for (let k in eleve) {
+		if (classe) {
+			resultat.classList.add(classe);
+		}
+		for (let k in obj) {
 			info = resultat.appendChild(document.createElement("span"));
 			info.classList.add(k);
-			info.innerHTML = eleve[k];
+			info.innerHTML = obj[k];
 		}
 		return resultat;
 	}
+	/**
+	 * Retourne une page après l'avoir ajoutée à une élément HTML fourni
+	 * @param {HTMLElement} conteneur Le conteneur dans lequel mettre la page
+	 * @returns {HTMLElement}
+	 */
 	static ajouterPage(conteneur) {
-		var resultat = conteneur.appendChild(document.createElement("div"));
+		var resultat = document.createElement("div");
+		if (conteneur) {
+			conteneur.appendChild(document.createElement("div"));
+		}
 		resultat.classList.add("interface");
 		resultat.classList.add("page");
 		return resultat;
 	}
+	/**
+	 * Ajoute un style inline et le remplit des règles donnees. Garde dans this.style une trace de la règle ajoutée.
+	 * @param {object} regles Les règles à ajouter sous forme {"cle": ":selecteur{}"}
+	 */
 	static ajouterStyle(regles) {
 		var style = document.head.appendChild(document.createElement("style"));
 		style.innerHTML = Object.values(regles).join(" ");
-		this.styles = {};
 		Object.keys(regles).forEach((r, i) => {
 			this.styles[r] = style.sheet.cssRules[i].style;
 		});
 	}
+	/**
+	 * Retourne une liste numérotée des grilles fournies (par l'API)
+	 * @param {array} liste Les grilles à afficher
+	 */
 	static listeGrilles(liste) {
 		var resultat = document.createElement("ol");
 		liste.forEach(g => {
@@ -273,6 +324,7 @@ class Grille extends Critere {
 		return resultat;
 	}
 	static init() {
+		this.style = {};
 		this.ajouterStyle({
 			"root": ":root{}",
 			"body": "body {}",
@@ -283,16 +335,14 @@ class Grille extends Critere {
 			if (location.search) {
 				this.load(App.path_data(location.search.substr(1) + ".json"));
 			} else {
-				this.load().then(() => {
-					var page = this.ajouterPage(document.body);
-					var div = page.appendChild(document.createElement("div"));
-					div.innerHTML = '<h1>Ajouter <code style="font-weight:lighter;">?mon_projet</code> à l\'adresse pour le faire afficher</h1>';
-					App.loadJson("api.php?g").then(data => {
-						if (!data) {
-							return false;
-						}
-						div.appendChild(this.listeGrilles(data));
-					});
+				var page = this.ajouterPage(document.body);
+				var div = page.appendChild(document.createElement("div"));
+				div.innerHTML = '<h1>Ajouter <code style="font-weight:lighter;">?mon_projet</code> à l\'adresse pour le faire afficher</h1>';
+				App.loadJson("api.php?g").then(data => {
+					if (!data) {
+						return false;
+					}
+					div.appendChild(this.listeGrilles(data));
 				});
 			}
 		}
