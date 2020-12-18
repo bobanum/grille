@@ -381,7 +381,7 @@ class App {
 		this.setPaths();
 		this.data = this.parseSearch(window.location.search);
 		this.addDependency([
-			'grille.css',
+			'style.css',
 		]);
 		this.addFavicon();
 		var promesses = [

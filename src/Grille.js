@@ -292,7 +292,7 @@ class Grille extends Critere {
 	static ajouterPage(conteneur) {
 		var resultat = document.createElement("div");
 		if (conteneur) {
-			conteneur.appendChild(document.createElement("div"));
+			conteneur.appendChild(resultat);
 		}
 		resultat.classList.add("interface");
 		resultat.classList.add("page");
@@ -324,7 +324,7 @@ class Grille extends Critere {
 		return resultat;
 	}
 	static init() {
-		this.style = {};
+		this.styles = {};
 		this.ajouterStyle({
 			"root": ":root{}",
 			"body": "body {}",

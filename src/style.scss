@@ -1,0 +1,113 @@
+:root {
+	--largeur: 8.5in;
+	--hauteur: 11in;
+	--marges-tb: .25in;
+	--marges-lr: .25in;
+   --marges: var(--marges-tb) var(--marges-lr) var(--marges-tb) var(--marges-lr);
+	--hauteur-trou: 14pt;
+	--colonnes: 1;
+	--rangees: 1;
+	--orientation: portrait;
+	--colonnesInternes: 1;
+	--police: 12;
+}
+
+@mixin encadre {
+   border: 1px solid black;
+   padding: 0 0.2em;
+   border-radius: .25em;
+}
+
+@page {
+   size: var(--largeur) var(--hauteur);
+   margin: 0;
+}
+
+@media all {
+	html {
+		height: 100%;
+		font-size: 10pt;
+		font-family: arial narrow;
+	}
+	body {
+		min-height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	div.page {
+		font-size: calc(1pt * var(--police));
+		box-sizing: border-box;
+		width: var(--largeur);
+		height: var(--hauteur);
+		display: grid;
+		grid-template: repeat(var(--rangees), 1fr) / repeat(var(--colonnes), 1fr);
+		padding: var(--marges);
+        grid-gap: calc(2 * var(--marges-lr));
+	}
+	div.page + div.page {
+		page-break-before: always;
+	}
+   @import "identification";
+   div.titre {
+      order: 0;
+   }
+   @import "grille";
+   .coches {
+      --bordure: .5px solid black;
+      order: -1;
+      display: flex;
+      border: var(--bordure);
+      border-radius: 1em;
+      padding: 0 .5ch;
+      & > * {
+         font-size: smaller;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         width: 1em;
+         height: 1.3em;
+         line-height: .8;
+         & + * {
+            border-left: var(--bordure);
+         }
+      }
+   }
+   div.lignes {
+      @include encadre;
+
+      & > div {
+         border-bottom: 1px solid black;
+         min-height: calc(var(--hauteur-trou) * 1pt);
+
+         &:before {
+            content: "";
+         }
+
+         &:last-child {
+            border-bottom: none;
+         }
+      }
+   }
+}
+
+@media screen {
+   div.page {
+      background-color: white;
+      box-shadow: 0 0 1em;
+      margin: 0 auto;
+      position: relative;
+      padding: var(--marges);
+   }
+
+   div.page + div.page {
+      margin-top: 2em;
+   }
+
+}
+
+@media print {
+   body > *:not(.page) {
+      display: none;
+   }
+}
