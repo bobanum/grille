@@ -1,6 +1,4 @@
-/*jslint esnext:true, browser:true, no-console:false*/
-/*eslint no-console:0*/
-//Fonction permettant de suire le chargements des promesses. Mettre false pour masquer les traces.
+//Fonction permettant de suivre le chargements des promesses. Mettre false pour masquer les traces.
 /* eslint-disable */
 console.trace = (false) ? console.log : function () {};
 /* eslint-enable */
@@ -8,7 +6,7 @@ console.trace = (false) ? console.log : function () {};
 /**
  * Classe gérant l'application en général. Seule script à inclure dans la page.
  */
-class App {
+export default class App {
 	static get config() {
 		var result = {};
 		this.configurables.forEach(property => {
@@ -231,18 +229,19 @@ class App {
         var url = window.location.href.split("?")[0];
 		var dossierPage = url.split("/").slice(0, -1);
 		this._pathPage = dossierPage.join("/");
-		var src = document.currentScript.getAttribute("src").split("/").slice(0, -1);
-		if (src.length > 0 && src[0] === "") {
-			src[0] = dossierPage.slice(0, 3).join("/");
-		}
-		if (src.length === 0 || !src[0].startsWith("http")) {
-			src = dossierPage.concat(src).filter(x => x !== ".");
-			let idx;
-			while (idx = src.indexOf(".."), idx > -1) {
-				src.splice(idx - 1, 2);
-			}
-		}
-		this._pathScript = src.join("/");
+		// var src = document.currentScript.getAttribute("src").split("/").slice(0, -1);
+		// if (src.length > 0 && src[0] === "") {
+		// 	src[0] = dossierPage.slice(0, 3).join("/");
+		// }
+		// if (src.length === 0 || !src[0].startsWith("http")) {
+		// 	src = dossierPage.concat(src).filter(x => x !== ".");
+		// 	let idx;
+		// 	while (idx = src.indexOf(".."), idx > -1) {
+		// 		src.splice(idx - 1, 2);
+		// 	}
+		// }
+		// this._pathScript = src.join("/");
+		this._pathScript = new URL(import.meta.url).href.split("/").slice(0,-1).join("/");
 	}
 	/**
 	 * Returns a promise resolved when given module is fully loaded
@@ -361,8 +360,8 @@ class App {
 		}
 		console.trace(this.name, "load");
 		var scripts = [
-			'Critere.js',
-			'Grille.js',
+			// 'Critere.js',
+			// 'Grille.js',
 		];
 		return Promise.all([
 			this.loadScripts(scripts),

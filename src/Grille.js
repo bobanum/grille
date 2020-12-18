@@ -1,6 +1,6 @@
-/*jslint esnext:true,browser:true*/
-/*global Critere, App */
-class Grille extends Critere {
+import Critere from "./Critere.js";
+import App from "./App.js";
+export default class Grille extends Critere {
 	/**
 	 * Creates an instance of Grille.
 	 */
@@ -323,6 +323,11 @@ class Grille extends Critere {
 		});
 		return resultat;
 	}
+	static parse(grille) {
+		grille = this.fromObject(grille);
+		grille.ajouterA(document.body);
+		return grille;
+	}
 	static init() {
 		this.styles = {};
 		this.ajouterStyle({
@@ -338,12 +343,12 @@ class Grille extends Critere {
 				var page = this.ajouterPage(document.body);
 				var div = page.appendChild(document.createElement("div"));
 				div.innerHTML = '<h1>Ajouter <code style="font-weight:lighter;">?mon_projet</code> à l\'adresse pour le faire afficher</h1>';
-				App.loadJson("api.php?g").then(data => {
-					if (!data) {
-						return false;
-					}
-					div.appendChild(this.listeGrilles(data));
-				});
+				// App.loadJson("api.php?g").then(data => {
+				// 	if (!data) {
+				// 		return false;
+				// 	}
+				// 	div.appendChild(this.listeGrilles(data));
+				// });
 			}
 		}
 	}

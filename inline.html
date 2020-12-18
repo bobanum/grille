@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="style.css"/>
+<!--	<script src="https://bobanum.github.io/grille/src/App.js"></script>-->
+	<script type="module">
+		import Grille from "./src/Grille.js";
+		Grille.parse(
+			{
+	"titre": "Exemple|droite",
+	"colonnes": 4,
+	"rangees": 1,
+	"colonnesInternes": 1,
+	"valeur": null,
+	"papier": "legal",
+	"orientation": "paysage",
+	"police": 12,
+	"trou": 18,
+	"criteres": [
+		{
+			"titre": "Un critère avec sous-critères",
+			"criteres": [
+				{
+					"titre": "Premier sous-critère",
+					"valeur": 3
+				},
+				{
+					"titre": "Deuxième sous-critère sans valeur"				},
+				{
+					"titre": "Et des sous-sous-critères",
+					"criteres": [
+						{
+							"titre": "Un sous-sous-critère",
+							"valeur": 3
+						}
+					]
+				}
+			]
+		},
+		{
+			"titre": "Un critère sans sous-critère",
+			"valeur": 3
+			
+		},
+		{
+			"titre": "Des commentaires",
+			"lignes": 5
+		}
+	]
+}
+		)
+	</script>
+	<title>Grille de correction</title>
+</head>
+
+<body>
+	<h1 onclick="window.location = window.location.pathname">Grille de cor<b>r</b>ection</h1>
+</body>
+
+</html>

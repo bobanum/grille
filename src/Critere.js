@@ -1,5 +1,4 @@
-/*jslint esnext:true,browser:true*/
-class Critere {
+export default class Critere {
 	constructor() {
 		this._titre = "";
 		this._valeur = null;
@@ -81,7 +80,6 @@ class Critere {
 		titre.forEach(t => {
 			var span = resultat.appendChild(document.createElement('span'));
 			span.innerHTML = t;
-//			resultat.innerHTML = this.titre;
 		});
 		return resultat;
 	}
