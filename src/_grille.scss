@@ -56,9 +56,10 @@ div.grille {
          //				Spécifique au synthese. Valider pour les autres
          display: grid;
          grid-template-columns: repeat(var(--colonnesInternes), 1fr);
-         grid-gap: 1em;
+         grid-gap: var(--gap, 1em);
          justify-content: space-between;
          align-items: flex-start;
+         align-content: var(--align);
       }
    }
 

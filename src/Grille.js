@@ -58,11 +58,31 @@ export default class Grille extends Critere {
 	 * Détermine la hauteur des zones inscriptibles
 	 */
 	get trou() {
-		return this._police;
+		return this._trou;
 	}
 	set trou(val) {
 		this._trou = val;
 		Grille.setVariable("hauteur-trou", this._trou);
+	}
+	/**
+	 * Détermine la hauteur des zones inscriptibles
+	 */
+	get align() {
+		return this._align;
+	}
+	set align(val) {
+		this._align = val;
+		Grille.setVariable("align", this._align);
+	}
+	/**
+	 * Détermine la hauteur des zones inscriptibles
+	 */
+	get gap() {
+		return this._gap;
+	}
+	set gap(val) {
+		this._gap = val;
+		Grille.setVariable("gap", this._gap);
 	}
 	/**
 	 * Détermine le nombre à l'intérieur d'un feuillet (Pas très au point)
@@ -143,6 +163,8 @@ export default class Grille extends Critere {
 		var resultat = document.createElement("div");
 		resultat.classList.add("identification");
 		resultat.setAttribute("data-pts", valeur);
+		var span = resultat.appendChild(document.createElement("span"));
+		span.classList.add("eleve");
 		return resultat;
 	}
 	/**
@@ -225,11 +247,25 @@ export default class Grille extends Critere {
 	ajouterA(element) {
 		var nb = this.colonnes * this.rangees;
 		var dom = this.dom;
-		console.log(this.eleves);
-		if (!App.eleves) {
+		if (!App.eleves && !this.eleves) {
 			let page = Grille.ajouterPage(element);
 			page.appendChild(dom);
 			for (let i = 1; i < nb; i += 1) {
+				page.appendChild(dom.cloneNode(true));
+			}
+		} else if (this.eleves) {
+			let page;
+			for (let i = 0, n = this.eleves.length; i < n; i += 1) {
+				let eleve = this.eleves[i];
+				console.log(eleve);
+				if (i % nb === 0) {
+					page = Grille.ajouterPage(element);
+				}
+				let g = page.appendChild(dom.cloneNode(true));
+				g.querySelector("div.identification .eleve").replaceWith(this.html_identitication2(eleve, "eleve"));
+			}
+			let reste = (nb - this.eleves.length % nb) % nb;
+			for (let i = 0, n = reste; i < n; i += 1) {
 				page.appendChild(dom.cloneNode(true));
 			}
 		} else {
@@ -282,6 +318,19 @@ export default class Grille extends Critere {
 			info.classList.add(k);
 			info.innerHTML = obj[k];
 		}
+		return resultat;
+	}
+	html_identitication2(txt, classe) {
+		var resultat, info;
+		resultat = document.createElement("span");
+		if (classe) {
+			resultat.classList.add(classe);
+		}
+		var parts = txt.split("|");
+		parts.forEach(part => {
+			info = resultat.appendChild(document.createElement("span"));
+			info.innerHTML = part;
+		});
 		return resultat;
 	}
 	/**

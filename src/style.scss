@@ -79,6 +79,7 @@
       & > div {
          border-bottom: 1px solid black;
          min-height: calc(var(--hauteur-trou) * 1pt);
+         display: grid;
 
          &:before {
             content: "";

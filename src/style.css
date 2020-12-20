@@ -1,4 +1,3 @@
-@charset "UTF-8";
 :root {
   --largeur: 8.5in;
   --hauteur: 11in;
@@ -52,9 +51,11 @@
     -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
             order: 1;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    position: relative;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 8ch;
+        grid-template-columns: 1fr 8ch;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -155,10 +156,10 @@
   div.identification::before {
     -ms-flex-item-align: start;
         align-self: flex-start;
-    content: "Élève";
     -webkit-box-flex: 0;
         -ms-flex: 0 0 auto;
             flex: 0 0 auto;
+    position: absolute;
   }
   div.titre {
     -webkit-box-ordinal-group: 1;
@@ -254,13 +255,15 @@
     display: grid;
     -ms-grid-columns: (1fr)[var];
         grid-template-columns: repeat(var(--colonnesInternes), 1fr);
-    grid-gap: 1em;
+    grid-gap: var(--gap, 1em);
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
     -webkit-box-align: start;
         -ms-flex-align: start;
             align-items: flex-start;
+    -ms-flex-line-pack: var(--align);
+        align-content: var(--align);
   }
   div.grille.niveau-1 > div.titre {
     background-color: #d9d9d9;
@@ -364,6 +367,8 @@
   div.lignes > div {
     border-bottom: 1px solid black;
     min-height: calc(var(--hauteur-trou) * 1pt);
+    display: -ms-grid;
+    display: grid;
   }
   div.lignes > div:before {
     content: "";

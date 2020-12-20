@@ -7,17 +7,27 @@
 <!--	<script src="https://bobanum.github.io/grille/src/App.js"></script>-->
 	<script type="module">
 		import Grille from "./src/Grille.js";
+		// import Grille from "https://bobanum.github.io/grille/src/Grille.js";
+		// import Grille from "https://cdn.jsdelivr.net/gh/bobanum/grille@grille-inline/src/Grille.js";
 		Grille.parse(
 			{
-	"titre": "Exemple|droite",
-	"colonnes": 4,
+	"titre": "Exemple droite",
+	"colonnes": 3,
 	"rangees": 1,
 	"colonnesInternes": 1,
 	"valeur": null,
-	"papier": "legal",
+	"papier": "lettre",
 	"orientation": "paysage",
 	"police": 12,
 	"trou": 18,
+	"align": "flex-start",
+	"gap": "2em",
+	"eleves": [
+		"Rita Rate|1234567",
+		"Martin Boudreau|0012345",
+		""
+	],
+	"style": ".eleve :nth-child(2) {font-size: .7em;} .eleve{display: grid !important;}",
 	"criteres": [
 		{
 			"titre": "Un critère avec sous-critères",
@@ -27,7 +37,8 @@
 					"valeur": 3
 				},
 				{
-					"titre": "Deuxième sous-critère sans valeur"				},
+					"titre": "Deuxième sous-critère sans valeur"				
+				},
 				{
 					"titre": "Et des sous-sous-critères",
 					"criteres": [
@@ -40,13 +51,17 @@
 			]
 		},
 		{
-			"titre": "Un critère sans sous-critère",
+			"titre": "Un critère ¶sans sous-critère",
 			"valeur": 3
 			
 		},
 		{
 			"titre": "Des commentaires",
-			"lignes": 5
+			"lignes": 3
+		},
+		{
+			"titre": "Du texte",
+			"lignes": ["lorem", "ipsum"]
 		}
 	]
 }
@@ -55,8 +70,6 @@
 	<title>Grille de correction</title>
 </head>
 
-<body>
-	<h1 onclick="window.location = window.location.pathname">Grille de cor<b>r</b>ection</h1>
-</body>
+<body></body>
 
 </html>

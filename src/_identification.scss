@@ -2,7 +2,9 @@ div.identification {
     border: 1px solid black;
     min-height: 2em;
     order:1;
-    display: flex;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 8ch;
     align-items: center;
     justify-content: space-between;
     border-radius: .25em;
@@ -90,7 +92,8 @@ div.identification {
 
   &::before {
      align-self: flex-start;
-     content: "Élève";
+   //   content: "Élève";
      flex: 0 0 auto;
+     position: absolute;
   }
 }

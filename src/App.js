@@ -4,7 +4,7 @@ console.trace = (false) ? console.log : function () {};
 /* eslint-enable */
 
 /**
- * Classe gérant l'application en général. Seule script à inclure dans la page.
+ * Classe gérant l'application en général. Seul script à inclure dans la page.
  */
 export default class App {
 	static get config() {
