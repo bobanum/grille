@@ -14,6 +14,13 @@ export default class Grille extends Critere {
 		this.police = 12;
 		this.trou = 18;
 	}
+	get titre() {
+		return super.titre;
+	}
+	set titre(val) {
+		super.titre = val;
+		document.title = "Grille de correction - " + val;
+	}
 	/**
 	 * Paramètre style du json
 	 */
